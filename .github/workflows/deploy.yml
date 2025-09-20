@@ -20,9 +20,9 @@ jobs:
 
       - name: Run generator
         env:
-          HOST: https://YOUR_USERNAME.github.io/YOUR_REPO_NAME
+          HOST: https://neverloseyoursm1le.github.io/analyses
         run: |
-          python3 generate.py --out site --host $HOST
+          python3 analyses/generate.py --out analyses --host $HOST 
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
