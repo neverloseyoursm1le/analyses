@@ -7,8 +7,8 @@ def main():
     os.makedirs(outdir, exist_ok=True)
 
     analyses = []
-    with open("analyses/data.csv", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
+    with open("analyses/data.csv", newline="", encoding="utf-8") as f:
+    reader = csv.DictReader(f, delimiter="|")
         for row in reader:
             slug = row["slug"].strip()
             title = row["title"].strip()
@@ -88,3 +88,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
