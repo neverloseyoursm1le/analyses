@@ -1,91 +1,143 @@
-import csv, json, os, sys
+import csv
+import argparse
+from pathlib import Path
+import json
+
+def render_page(row, host):
+    """Генерация HTML-страницы для одного анализа"""
+    slug = row["slug"].strip()
+    title = row["title"].strip()
+    summary = row["summary"].strip()
+    description = row["description"].strip()
+    norm_low = row["norm_low"].strip()
+    norm_mid = row["norm_mid"].strip()
+    norm_high = row["norm_high"].strip()
+    below = row["below"].strip()
+    normal = row["normal"].strip()
+    above = row["above"].strip()
+    prep = row["prep"].strip()
+    tags = row["tags"].strip()
+
+    html = f"""<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} — Справочник анализов</title>
+  <meta name="description" content="{summary}">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>{title}</h1>
+  <p class="muted">{summary}</p>
+  <nav><a href="index.html">← Назад к списку</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Описание</h2>
+    <p>{description}</p>
+  </section>
+
+  <section class="card">
+    <h2>Нормы и отклонения</h2>
+    <table>
+      <thead>
+        <tr><th>Значение</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>{norm_low}</td><td>{below}</td></tr>
+        <tr><td>{norm_mid}</td><td>{normal}</td></tr>
+        <tr><td>{norm_high}</td><td>{above}</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Подготовка</h2>
+    <p>{prep}</p>
+  </section>
+
+  <section class="card">
+    <h2>Проверка своего результата</h2>
+    <input id="val" type="number" step="any" placeholder="Введите значение">
+    <button id="btn-check">Проверить</button>
+    <div id="out" class="muted"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Теги: {tags}</p>
+  <p><a href="index.html">Вернуться к списку анализов</a></p>
+</footer>
+
+<script>
+document.getElementById('btn-check').addEventListener('click', function(){{
+    var v = parseFloat(document.getElementById('val').value);
+    var out = document.getElementById('out');
+    if(isNaN(v)) {{
+        out.innerHTML = '<p class="muted">Введите корректное число</p>';
+        return;
+    }}
+    var low = parseFloat("{norm_low}".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    var high = parseFloat("{norm_high}".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    if(!isFinite(low) || !isFinite(high)) {{
+        out.innerHTML = '<p><strong>Значение зарегистрировано: ' + v + '</strong></p>';
+        return;
+    }}
+    if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong> {below}</p>';
+    else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong> {above}</p>';
+    else out.innerHTML = '<p><strong>В пределах нормы.</strong> {normal}</p>';
+}});
+</script>
+
+</body>
+</html>
+"""
+    return html
+
 
 def main():
-    outdir = sys.argv[sys.argv.index("--out")+1] if "--out" in sys.argv else "analyses"
-    host = sys.argv[sys.argv.index("--host")+1] if "--host" in sys.argv else ""
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--out", default="analyses", help="Выходная директория")
+    parser.add_argument("--host", default="", help="Хост для ссылок (например, yourname.github.io/analyses)")
+    args = parser.parse_args()
 
-    os.makedirs(outdir, exist_ok=True)
+    outdir = Path(args.out)
+    outdir.mkdir(parents=True, exist_ok=True)
 
-    analyses = []
+    items = []
+
     with open("analyses/data.csv", newline="", encoding="utf-8") as f:
-    reader = csv.DictReader(f, delimiter="|")
+        reader = csv.DictReader(f, delimiter="|")
         for row in reader:
             slug = row["slug"].strip()
             title = row["title"].strip()
-            summary = row.get("summary","").strip()
-            tags = [t.strip() for t in row.get("tags","").split(",") if t.strip()]
-            nl = row.get("norm_low","").strip()
-            nh = row.get("norm_high","").strip()
-            below = row.get("below","").strip()
-            above = row.get("above","").strip()
-            normal = row.get("normal","").strip()
+            summary = row["summary"].strip()
+            description = row["description"].strip()
+            tags = [t.strip() for t in row["tags"].split(",")]
 
-            url = f"{host}/{outdir}/{slug}.html" if host else f"{outdir}/{slug}.html"
+            url = f"https://{args.host}/{slug}.html" if args.host else f"{slug}.html"
 
-            analyses.append({
+            items.append({
                 "slug": slug,
                 "title": title,
                 "summary": summary,
+                "description": description,
                 "tags": tags,
                 "url": url
             })
 
             # генерируем HTML-страницу
-            html = f"""<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>{title} – Анализы</title>
-  <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>{title}</h1>
-    <p>{summary}</p>
+            page_html = render_page(row, args.host)
+            with open(outdir / f"{slug}.html", "w", encoding="utf-8") as outf:
+                outf.write(page_html)
 
-    <div class="card">
-      <h3>Проверка значения</h3>
-      <label for="val">Введите число:</label>
-      <input id="val" type="number" placeholder="Введите значение">
-      <button id="btn-check">Проверить</button>
-      <div id="out" class="result-box"></div>
-    </div>
+    # сохраняем JSON для поиска
+    with open(outdir / "analyses.json", "w", encoding="utf-8") as jf:
+        json.dump(items, jf, ensure_ascii=False, indent=2)
 
-    <div class="card">
-      <h3>Нормальные значения</h3>
-      <table>
-        <tr><th>Ниже нормы (&lt;{nl})</th><td>{below}</td></tr>
-        <tr><th>Норма ({nl}–{nh})</th><td>{normal}</td></tr>
-        <tr><th>Выше нормы (&gt;{nh})</th><td>{above}</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <script>
-    function check(){{
-        var v = parseFloat(document.getElementById('val').value);
-        var out = document.getElementById('out');
-        if(isNaN(v)){{ out.innerHTML = '<p class="muted">Введите корректное число</p>'; return; }}
-        var low = {nl or 'NaN'}, high = {nh or 'NaN'};
-        if(!isFinite(low) || !isFinite(high)){{ out.innerHTML = '<p><strong>Значение: '+v+'</strong></p>'; return; }}
-        if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong></p><p>{below}</p>';
-        else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong></p><p>{above}</p>';
-        else out.innerHTML = '<p><strong>В пределах нормы.</strong></p><p>{normal}</p>';
-    }}
-    document.addEventListener('DOMContentLoaded', function(){{
-        document.getElementById('btn-check').addEventListener('click', check);
-    }});
-  </script>
-</body>
-</html>
-"""
-            with open(os.path.join(outdir, f"{slug}.html"), "w", encoding="utf-8") as f2:
-                f2.write(html)
-
-    # сохраняем JSON для главной страницы
-    with open(os.path.join(outdir, "analyses.json"), "w", encoding="utf-8") as f:
-        json.dump(analyses, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
     main()
-
