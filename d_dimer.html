@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D-димер — Справочник анализов</title>
+  <meta name="description" content="Маркер тромбообразования/фибринолиза.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>D-димер</h1>
+  <p class="muted">Маркер тромбообразования/фибринолиза.</p>
+  <nav><a href="index.html">← Назад к списку</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Описание</h2>
+    <p>Помогает исключать тромбоз при низком клиническом риске.</p>
+  </section>
+
+  <section class="card">
+    <h2>Нормы и отклонения</h2>
+    <table>
+      <thead>
+        <tr><th>Значение</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><500 ng/mL FEU</td><td>Низкие значения — маловероятен ТВЭЛ</td></tr>
+        <tr><td><500 ng/mL FEU</td><td>Норма — низкие уровни.</td></tr>
+        <tr><td>>1000 ng/mL FEU</td><td>Высокие — возможен тромбоз/тромбоэмболия.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Подготовка</h2>
+    <p>По направлению; не натощак критично.</p>
+  </section>
+
+  <section class="card">
+    <h2>Проверка своего результата</h2>
+    <input id="val" type="number" step="any" placeholder="Введите значение">
+    <button id="btn-check">Проверить</button>
+    <div id="out" class="muted"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Теги: d_dimer,коагуляция</p>
+  <p><a href="index.html">Вернуться к списку анализов</a></p>
+</footer>
+
+<script>
+document.getElementById('btn-check').addEventListener('click', function(){
+    var v = parseFloat(document.getElementById('val').value);
+    var out = document.getElementById('out');
+    if(isNaN(v)) {
+        out.innerHTML = '<p class="muted">Введите корректное число</p>';
+        return;
+    }
+    var low = parseFloat("<500 ng/mL FEU".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    var high = parseFloat(">1000 ng/mL FEU".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    if(!isFinite(low) || !isFinite(high)) {
+        out.innerHTML = '<p><strong>Значение зарегистрировано: ' + v + '</strong></p>';
+        return;
+    }
+    if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong> Низкие значения — маловероятен ТВЭЛ</p>';
+    else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong> Высокие — возможен тромбоз/тромбоэмболия.</p>';
+    else out.innerHTML = '<p><strong>В пределах нормы.</strong> Норма — низкие уровни.</p>';
+});
+</script>
+
+</body>
+</html>

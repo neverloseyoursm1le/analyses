@@ -1,0 +1,729 @@
+[
+  {
+    "slug": "glucose",
+    "title": "Глюкоза (натощак)",
+    "summary": "Ключевой тест для диагностики диабета.",
+    "description": "Глюкоза натощак: норма и отклонения.",
+    "tags": [
+      "глюкоза",
+      "диабет",
+      "nat"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/glucose.html"
+  },
+  {
+    "slug": "hba1c",
+    "title": "HbA1c (гликированный Hb)",
+    "summary": "Отражает средний уровень глюкозы за 2–3 месяца.",
+    "description": "HbA1c для диагностики диабета и контроля лечения.",
+    "tags": [
+      "HbA1c",
+      "гликированный"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/hba1c.html"
+  },
+  {
+    "slug": "hemoglobin",
+    "title": "Гемоглобин (Hb)",
+    "summary": "Переносчик кислорода — важный маркер анемии.",
+    "description": "Гемоглобин: нормы мужчина/женщина, причины изменения.",
+    "tags": [
+      "гемоглобин",
+      "анемия"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/hemoglobin.html"
+  },
+  {
+    "slug": "rbc",
+    "title": "Эритроциты (RBC)",
+    "summary": "Количество красных клеток крови.",
+    "description": "RBC: низкие — анемия, высокие — дегидратация.",
+    "tags": [
+      "эритроциты",
+      "кровь"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/rbc.html"
+  },
+  {
+    "slug": "wbc",
+    "title": "Лейкоциты (WBC)",
+    "summary": "Иммунный индикатор — инфекция/воспаление.",
+    "description": "WBC: повышение при инфекциях, понижение при вирусах.",
+    "tags": [
+      "лейкоциты",
+      "воспаление"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/wbc.html"
+  },
+  {
+    "slug": "platelets",
+    "title": "Тромбоциты (PLT)",
+    "summary": "Участвуют в свёртывании крови.",
+    "description": "Тромбоциты: низкие — риск кровотечения, высокие — тромбоз.",
+    "tags": [
+      "тромбоциты",
+      "свертывание"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/platelets.html"
+  },
+  {
+    "slug": "esr",
+    "title": "СОЭ (ESR)",
+    "summary": "Неспецифический маркер воспаления.",
+    "description": "ESR повышается при воспалении и инфекциях.",
+    "tags": [
+      "soe",
+      "esr",
+      "воспаление"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/esr.html"
+  },
+  {
+    "slug": "crp",
+    "title": "C-реактивный белок (CRP)",
+    "summary": "Быстрый маркер воспаления.",
+    "description": "CRP: острое воспаление или инфекция.",
+    "tags": [
+      "crp",
+      "воспаление"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/crp.html"
+  },
+  {
+    "slug": "alt",
+    "title": "АЛТ (ALT)",
+    "summary": "Показатель повреждения печени (гепатоциты).",
+    "description": "АЛТ повышается при гепатите/повреждении печени.",
+    "tags": [
+      "alt",
+      "печень"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/alt.html"
+  },
+  {
+    "slug": "ast",
+    "title": "АСТ (AST)",
+    "summary": "Фермент печени и мышц.",
+    "description": "АСТ повышается при повреждении печени и мышц.",
+    "tags": [
+      "ast",
+      "печень"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/ast.html"
+  },
+  {
+    "slug": "bilirubin",
+    "title": "Билирубин общий/прямой",
+    "summary": "Оценивает желтуху и печёночный обмен.",
+    "description": "Повышение указывает на гемолиз или холестаз.",
+    "tags": [
+      "билирубин",
+      "печень"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/bilirubin.html"
+  },
+  {
+    "slug": "albumin",
+    "title": "Альбумин",
+    "summary": "Основной белок сыворотки — статус питания.",
+    "description": "Низкий альбумин связан с хроническими заболеваниями.",
+    "tags": [
+      "альбумин",
+      "питание"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/albumin.html"
+  },
+  {
+    "slug": "total-protein",
+    "title": "Общий белок",
+    "summary": "Сумма белковых фракций крови.",
+    "description": "Изменения указывают на воспаление/дегидратацию.",
+    "tags": [
+      "белок",
+      "сыворотка"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/total-protein.html"
+  },
+  {
+    "slug": "creatinine",
+    "title": "Креатинин",
+    "summary": "Показатель функции почек.",
+    "description": "Креатинин повышается при снижении GFR.",
+    "tags": [
+      "креатинин",
+      "почки"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/creatinine.html"
+  },
+  {
+    "slug": "egfr",
+    "title": "eGFR",
+    "summary": "Расчёт функции почек по креатинину.",
+    "description": "eGFR: оценка стадии ХБП.",
+    "tags": [
+      "egfr",
+      "почки"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/egfr.html"
+  },
+  {
+    "slug": "urea",
+    "title": "Мочевина",
+    "summary": "Метаболический маркер азотистого обмена.",
+    "description": "Повышение при дегидратации/почечной дисфункции.",
+    "tags": [
+      "мочевина",
+      "почки"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/urea.html"
+  },
+  {
+    "slug": "ferritin",
+    "title": "Ферритин",
+    "summary": "Запасы железа в организме.",
+    "description": "Ферритин низкий при дефиците железа.",
+    "tags": [
+      "ферритин",
+      "железо"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/ferritin.html"
+  },
+  {
+    "slug": "iron",
+    "title": "Железо сывороточное",
+    "summary": "Плазменное железо — динамический показатель.",
+    "description": "Низкий при дефиците, высокий при гемохроматозе.",
+    "tags": [
+      "железо",
+      "анемия"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/iron.html"
+  },
+  {
+    "slug": "b12",
+    "title": "Витамин B12",
+    "summary": "Дефицит вызывает неврологию/анемию.",
+    "description": "B12: низкий — нейропатия и мегалобластная анемия.",
+    "tags": [
+      "b12",
+      "витамин"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/b12.html"
+  },
+  {
+    "slug": "folate",
+    "title": "Фолиевая кислота",
+    "summary": "Важна для кроветворения и беременности.",
+    "description": "Низкий фолат — анемия, дефекты нервной трубки.",
+    "tags": [
+      "фолат",
+      "фолиевая"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/folate.html"
+  },
+  {
+    "slug": "vitamin-d25",
+    "title": "Витамин D (25-OH)",
+    "summary": "Оценка статуса витамин D.",
+    "description": "Дефицит широко распространён и влияет на кости.",
+    "tags": [
+      "vitamin_d",
+      "витамин_d25"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/vitamin-d25.html"
+  },
+  {
+    "slug": "calcium",
+    "title": "Кальций общий",
+    "summary": "Минерал для костей и нервов.",
+    "description": "Высокий/низкий — влияет на сердце/кости.",
+    "tags": [
+      "кальций",
+      "минералы"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/calcium.html"
+  },
+  {
+    "slug": "magnesium",
+    "title": "Магний",
+    "summary": "Минерал для сердца и мышц.",
+    "description": "Дефицит — аритмии, мышечные судороги.",
+    "tags": [
+      "магний",
+      "минералы"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/magnesium.html"
+  },
+  {
+    "slug": "sodium",
+    "title": "Натрий (Na)",
+    "summary": "Электролит водно-электролитного баланса.",
+    "description": "Изменение натрия влияет на ЦНС.",
+    "tags": [
+      "натрий",
+      "электролиты"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/sodium.html"
+  },
+  {
+    "slug": "potassium",
+    "title": "Калий (K)",
+    "summary": "Критически важен для сердца.",
+    "description": "Отклонения — аритмии, слабость.",
+    "tags": [
+      "калий",
+      "электролиты"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/potassium.html"
+  },
+  {
+    "slug": "chloride",
+    "title": "Хлориды (Cl)",
+    "summary": "Поддерживают кислотно-щелочной баланс.",
+    "description": "Отклонения редко — сопутствуют Na/K.",
+    "tags": [
+      "хлориды",
+      "электролиты"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/chloride.html"
+  },
+  {
+    "slug": "pt_inr",
+    "title": "Протромбиновое время / INR",
+    "summary": "Оценивает свёртываемость и контроль антикоагулянтов.",
+    "description": "INR важен у пациентов на варфарине.",
+    "tags": [
+      "coagulation",
+      "ptinr"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/pt_inr.html"
+  },
+  {
+    "slug": "d_dimer",
+    "title": "D-димер",
+    "summary": "Маркер тромбообразования/фибринолиза.",
+    "description": "Помогает исключать тромбоз при низком клиническом риске.",
+    "tags": [
+      "d_dimer",
+      "коагуляция"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/d_dimer.html"
+  },
+  {
+    "slug": "troponin_i",
+    "title": "Тропонин I",
+    "summary": "Кардиальный маркер при инфаркте миокарда.",
+    "description": "Тропонин повышается при повреждении миокарда.",
+    "tags": [
+      "тропонин",
+      "сердце"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/troponin_i.html"
+  },
+  {
+    "slug": "ck_mb",
+    "title": "CK-MB",
+    "summary": "Кардиальный фермент (реже используется рутинно).",
+    "description": "Помогает при подозрении на ИМ.",
+    "tags": [
+      "ck_mb",
+      "сердце"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/ck_mb.html"
+  },
+  {
+    "slug": "troponin_t",
+    "title": "Тропонин T",
+    "summary": "Альтернативный кардиальный маркер.",
+    "description": "Сильный индикатор повреждения миокарда.",
+    "tags": [
+      "тропонин",
+      "сердце"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/troponin_t.html"
+  },
+  {
+    "slug": "psa",
+    "title": "PSA (простат-специфический антиген)",
+    "summary": "Скрининг простаты и мониторинг РПЖ.",
+    "description": "Повышение требует урологического обследования.",
+    "tags": [
+      "psa",
+      "простата"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/psa.html"
+  },
+  {
+    "slug": "hbsag",
+    "title": "HBsAg (гепатит B)",
+    "summary": "Скрининг на вирус гепатита B.",
+    "description": "Положительный — активная инфекция или носительство.",
+    "tags": [
+      "hepatitis_b",
+      "hbsag"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/hbsag.html"
+  },
+  {
+    "slug": "hcv_ab",
+    "title": "Антитела к HCV",
+    "summary": "Скрининг на вирусный гепатит C.",
+    "description": "Положительный требует ПЦР для подтверждения.",
+    "tags": [
+      "hepatitis_c",
+      "hcv"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/hcv_ab.html"
+  },
+  {
+    "slug": "hiv_ab",
+    "title": "Антитела к HIV",
+    "summary": "Скрининг на ВИЧ-инфекцию.",
+    "description": "Положительный — требует подтверждения PCR/Western blot.",
+    "tags": [
+      "hiv",
+      "инфекции"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/hiv_ab.html"
+  },
+  {
+    "slug": "urine_routine",
+    "title": "Общий анализ мочи (ОАМ)",
+    "summary": "Физико-химические и микроскопические показатели мочи.",
+    "description": "ОАМ: цвет, удельный вес, белок, лейкоциты, эритроциты.",
+    "tags": [
+      "oam",
+      "моча"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/urine_routine.html"
+  },
+  {
+    "slug": "urine_culture",
+    "title": "Посев мочи",
+    "summary": "Определяет бактерии и антибиотикочувствительность.",
+    "description": "Для подтверждения ИМП и подбора терапии.",
+    "tags": [
+      "посев",
+      "микробиология"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/urine_culture.html"
+  },
+  {
+    "slug": "stool_occult",
+    "title": "Скрытая кровь в кале (FOBT)",
+    "summary": "Скрининг на кровопотери ЖКТ.",
+    "description": "Положительный требует колоноскопии для выяснения причин.",
+    "tags": [
+      "fobt",
+      "кал"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/stool_occult.html"
+  },
+  {
+    "slug": "stool_ova",
+    "title": "Копрологическое исследование (яйца/цисты)",
+    "summary": "Ищут паразитов в кале.",
+    "description": "Наличие яиц/цист требует лечения.",
+    "tags": [
+      "паразиты",
+      "кал"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/stool_ova.html"
+  },
+  {
+    "slug": "fecal_calprotectin",
+    "title": "Кальпротектин фекалий",
+    "summary": "Маркер воспаления кишечника.",
+    "description": "Высокие значения при воспалительных заболеваниях кишечника.",
+    "tags": [
+      "кал",
+      "воспаление"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/fecal_calprotectin.html"
+  },
+  {
+    "slug": "lipase",
+    "title": "Липаза",
+    "summary": "Специфичный маркер поджелудочной железы.",
+    "description": "Повышение при панкреатите.",
+    "tags": [
+      "липаза",
+      "панкреатит"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/lipase.html"
+  },
+  {
+    "slug": "amylase",
+    "title": "Амилаза",
+    "summary": "Фермент поджелудочной/слюнных желёз.",
+    "description": "Повышение при панкреатите и слюнных заболеваниях.",
+    "tags": [
+      "амилаза",
+      "панкреатит"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/amylase.html"
+  },
+  {
+    "slug": "insulin",
+    "title": "Инсулин",
+    "summary": "Исследуется при подозрении на инсулинрезистентность.",
+    "description": "Инсулин натощак и OGTT помогают оценить метаболизм.",
+    "tags": [
+      "инсулин",
+      "диабет"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/insulin.html"
+  },
+  {
+    "slug": "cortisol",
+    "title": "Кортизол",
+    "summary": "Гормон стресса; суточные колебания.",
+    "description": "Отклонения при синдроме Кушинга/аддисона.",
+    "tags": [
+      "кортизол",
+      "гормоны"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/cortisol.html"
+  },
+  {
+    "slug": "tsh",
+    "title": "TSH",
+    "summary": "Скрининг функции щитовидной железы.",
+    "description": "TSH: чувствительный тест на гипо/гипертиреоз.",
+    "tags": [
+      "tsh",
+      "щитовидка"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/tsh.html"
+  },
+  {
+    "slug": "free_t4",
+    "title": "Свободный T4",
+    "summary": "Активная фракция тироксина.",
+    "description": "Важен при интерпретации TSH.",
+    "tags": [
+      "ft4",
+      "щитовидка"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/free_t4.html"
+  },
+  {
+    "slug": "anti_tpo",
+    "title": "Антитела к ТПО",
+    "summary": "Маркер аутоиммунного тиреоидита.",
+    "description": "Положительные антитела указывают на аутоиммунность.",
+    "tags": [
+      "anti_tpo",
+      "аутоиммунитет"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/anti_tpo.html"
+  },
+  {
+    "slug": "hba",
+    "title": "Гемоглобин A (замена)",
+    "summary": "(служебная строка)ред.",
+    "description": "(служебное поле)",
+    "tags": [
+      "служебное"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/hba.html"
+  },
+  {
+    "slug": "vitamin_b1",
+    "title": "Витамин B1 (тиамин)",
+    "summary": "Минерал для нервной системы.",
+    "description": "Дефицит — берибери и неврологические симптомы.",
+    "tags": [
+      "vit_b1",
+      "витамины"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/vitamin_b1.html"
+  },
+  {
+    "slug": "vitamin_b6",
+    "title": "Витамин B6",
+    "summary": "Участвует в метаболизме аминокислот.",
+    "description": "Дефицит — неврологические симптомы.",
+    "tags": [
+      "vit_b6",
+      "витамины"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/vitamin_b6.html"
+  },
+  {
+    "slug": "vitamin_a",
+    "title": "Витамин A",
+    "summary": "Жирорастворимый витамин для зрения.",
+    "description": "Дефицит — куриная слепота; избыток — токсичность.",
+    "tags": [
+      "vitamin_a",
+      "витамины"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/vitamin_a.html"
+  },
+  {
+    "slug": "vitamin_e",
+    "title": "Витамин E",
+    "summary": "Антиоксидант, влияет на нейроны.",
+    "description": "Дефицит редок; симптомы — нейропатия.",
+    "tags": [
+      "vitamin_e",
+      "витамины"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/vitamin_e.html"
+  },
+  {
+    "slug": "fsh",
+    "title": "FSH",
+    "summary": "Репродуктивный гормон для оценки фертильности.",
+    "description": "Значения зависят от пола и фазы цикла.",
+    "tags": [
+      "fsh",
+      "гормоны"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/fsh.html"
+  },
+  {
+    "slug": "lh",
+    "title": "LH",
+    "summary": "Гормон овуляции и мужской функции.",
+    "description": "LH: оценивается вместе с FSH.",
+    "tags": [
+      "lh",
+      "гормоны"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/lh.html"
+  },
+  {
+    "slug": "estradiol",
+    "title": "Эстрадиол",
+    "summary": "Женский половой гормон; зависит от цикла.",
+    "description": "Уровни меняются по фазам цикла (указать день).",
+    "tags": [
+      "эстрадиол",
+      "гормоны"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/estradiol.html"
+  },
+  {
+    "slug": "testosterone",
+    "title": "Тестостерон",
+    "summary": "Половой гормон у мужчин и женщин.",
+    "description": "Уровни утром у мужчин выше.",
+    "tags": [
+      "тестостерон",
+      "гормоны"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/testosterone.html"
+  },
+  {
+    "slug": "prolactin",
+    "title": "Пролактин",
+    "summary": "Гормон лактации; повышение мешает фертильности.",
+    "description": "Высокие уровни приводят к аменорее и галакторее.",
+    "tags": [
+      "пролактин",
+      "гормоны"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/prolactin.html"
+  },
+  {
+    "slug": "creatine_kinase",
+    "title": "КК (CK)",
+    "summary": "Фермент повреждения мышц.",
+    "description": "Повышение при миопатии, травмах.",
+    "tags": [
+      "ck",
+      "мышцы"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/creatine_kinase.html"
+  },
+  {
+    "slug": "ammonia",
+    "title": "Аммиак",
+    "summary": "Повышение при печёночной энцефалопатии.",
+    "description": "Высокие значения указывают на печёночную недостаточность.",
+    "tags": [
+      "аммиак",
+      "печень"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/ammonia.html"
+  },
+  {
+    "slug": "homocysteine",
+    "title": "Гомоцистеин",
+    "summary": "Маркер риска ССЗ, связан с B-витаминами.",
+    "description": "Повышенный — риск атеросклероза.",
+    "tags": [
+      "homocysteine",
+      "сердце"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/homocysteine.html"
+  },
+  {
+    "slug": "ferritin_s",
+    "title": "Ферритин (женщины)",
+    "summary": "Отдельный контроль запасов железа у женщин.",
+    "description": "См. общую ферритиновую строку.",
+    "tags": [
+      "ферритин",
+      "женщины"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/ferritin_s.html"
+  },
+  {
+    "slug": "uric_acid",
+    "title": "Мочевая кислота",
+    "summary": "Риск подагры при повышении.",
+    "description": "Высокие уровни → отложения уратов.",
+    "tags": [
+      "мочевая_кислота",
+      "подагра"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/uric_acid.html"
+  },
+  {
+    "slug": "lp(a)",
+    "title": "Липопротеин(a)",
+    "summary": "Независимый фактор риска ССЗ.",
+    "description": "Высокие уровни повышают риск атеросклероза.",
+    "tags": [
+      "lpa",
+      "сердце"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/lp(a).html"
+  },
+  {
+    "slug": "aptt",
+    "title": "APTT",
+    "summary": "Активированное частичное тромбопределение.",
+    "description": "Оценивает внутренний путь свёртывания.",
+    "tags": [
+      "aptt",
+      "коагуляция"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/aptt.html"
+  },
+  {
+    "slug": "vitamin_k",
+    "title": "Витамин K",
+    "summary": "Важен для свертывания крови.",
+    "description": "Дефицит — кровоточивость.",
+    "tags": [
+      "vit_k",
+      "коагуляция"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/vitamin_k.html"
+  },
+  {
+    "slug": "fibrinogen",
+    "title": "Фибриноген",
+    "summary": "Коагуляционный белок; при воспалении растёт.",
+    "description": "Высокие — тромбоз, воспаление.",
+    "tags": [
+      "fibrinogen",
+      "коагуляция"
+    ],
+    "url": "https://neverloseyoursm1le.github.io/analyses/fibrinogen.html"
+  }
+]

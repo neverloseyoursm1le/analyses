@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тестостерон — Справочник анализов</title>
+  <meta name="description" content="Половой гормон у мужчин и женщин.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Тестостерон</h1>
+  <p class="muted">Половой гормон у мужчин и женщин.</p>
+  <nav><a href="index.html">← Назад к списку</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Описание</h2>
+    <p>Уровни утром у мужчин выше.</p>
+  </section>
+
+  <section class="card">
+    <h2>Нормы и отклонения</h2>
+    <table>
+      <thead>
+        <tr><th>Значение</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>M: <8 nmol/L;F:<0.5</td><td>Низкий — снижение либидо, утомляемость.</td></tr>
+        <tr><td>M:8–30 nmol/L;F:0.5–2.5</td><td>Норма — репродуктивная функция.</td></tr>
+        <tr><td>M:>40 nmol/L</td><td>Высокий — андрогения или опухоли.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Подготовка</h2>
+    <p>Сдавать утром, натощак.</p>
+  </section>
+
+  <section class="card">
+    <h2>Проверка своего результата</h2>
+    <input id="val" type="number" step="any" placeholder="Введите значение">
+    <button id="btn-check">Проверить</button>
+    <div id="out" class="muted"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Теги: тестостерон,гормоны</p>
+  <p><a href="index.html">Вернуться к списку анализов</a></p>
+</footer>
+
+<script>
+document.getElementById('btn-check').addEventListener('click', function(){
+    var v = parseFloat(document.getElementById('val').value);
+    var out = document.getElementById('out');
+    if(isNaN(v)) {
+        out.innerHTML = '<p class="muted">Введите корректное число</p>';
+        return;
+    }
+    var low = parseFloat("M: <8 nmol/L;F:<0.5".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    var high = parseFloat("M:>40 nmol/L".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    if(!isFinite(low) || !isFinite(high)) {
+        out.innerHTML = '<p><strong>Значение зарегистрировано: ' + v + '</strong></p>';
+        return;
+    }
+    if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong> Низкий — снижение либидо, утомляемость.</p>';
+    else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong> Высокий — андрогения или опухоли.</p>';
+    else out.innerHTML = '<p><strong>В пределах нормы.</strong> Норма — репродуктивная функция.</p>';
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>СОЭ (ESR) — Справочник анализов</title>
+  <meta name="description" content="Неспецифический маркер воспаления.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>СОЭ (ESR)</h1>
+  <p class="muted">Неспецифический маркер воспаления.</p>
+  <nav><a href="index.html">← Назад к списку</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Описание</h2>
+    <p>ESR повышается при воспалении и инфекциях.</p>
+  </section>
+
+  <section class="card">
+    <h2>Нормы и отклонения</h2>
+    <table>
+      <thead>
+        <tr><th>Значение</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>M:>15;F:>20</td><td>Высокая СОЭ — воспаление, хронические процессы.</td></tr>
+        <tr><td>M:2–10;F:3–15</td><td>Норма по возрасту/полу.</td></tr>
+        <tr><td>>30</td><td>Очень высокая — активный воспалительный процесс.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Подготовка</h2>
+    <p>Не требует подготовки.</p>
+  </section>
+
+  <section class="card">
+    <h2>Проверка своего результата</h2>
+    <input id="val" type="number" step="any" placeholder="Введите значение">
+    <button id="btn-check">Проверить</button>
+    <div id="out" class="muted"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Теги: soe,esr,воспаление</p>
+  <p><a href="index.html">Вернуться к списку анализов</a></p>
+</footer>
+
+<script>
+document.getElementById('btn-check').addEventListener('click', function(){
+    var v = parseFloat(document.getElementById('val').value);
+    var out = document.getElementById('out');
+    if(isNaN(v)) {
+        out.innerHTML = '<p class="muted">Введите корректное число</p>';
+        return;
+    }
+    var low = parseFloat("M:>15;F:>20".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    var high = parseFloat(">30".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    if(!isFinite(low) || !isFinite(high)) {
+        out.innerHTML = '<p><strong>Значение зарегистрировано: ' + v + '</strong></p>';
+        return;
+    }
+    if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong> Высокая СОЭ — воспаление, хронические процессы.</p>';
+    else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong> Очень высокая — активный воспалительный процесс.</p>';
+    else out.innerHTML = '<p><strong>В пределах нормы.</strong> Норма по возрасту/полу.</p>';
+});
+</script>
+
+</body>
+</html>

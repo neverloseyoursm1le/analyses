@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мочевина — Справочник анализов</title>
+  <meta name="description" content="Метаболический маркер азотистого обмена.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Мочевина</h1>
+  <p class="muted">Метаболический маркер азотистого обмена.</p>
+  <nav><a href="index.html">← Назад к списку</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Описание</h2>
+    <p>Повышение при дегидратации/почечной дисфункции.</p>
+  </section>
+
+  <section class="card">
+    <h2>Нормы и отклонения</h2>
+    <table>
+      <thead>
+        <tr><th>Значение</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>>7.2 mmol/L</td><td>Высокая — почки, дегидратация.</td></tr>
+        <tr><td>2.5–7.2 mmol/L</td><td>Норма — адекватный обмен.</td></tr>
+        <tr><td>>20 mmol/L</td><td>Очень высокие — почечная недостаточность.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Подготовка</h2>
+    <p>Натощак предпочтителен.</p>
+  </section>
+
+  <section class="card">
+    <h2>Проверка своего результата</h2>
+    <input id="val" type="number" step="any" placeholder="Введите значение">
+    <button id="btn-check">Проверить</button>
+    <div id="out" class="muted"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Теги: мочевина,почки</p>
+  <p><a href="index.html">Вернуться к списку анализов</a></p>
+</footer>
+
+<script>
+document.getElementById('btn-check').addEventListener('click', function(){
+    var v = parseFloat(document.getElementById('val').value);
+    var out = document.getElementById('out');
+    if(isNaN(v)) {
+        out.innerHTML = '<p class="muted">Введите корректное число</p>';
+        return;
+    }
+    var low = parseFloat(">7.2 mmol/L".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    var high = parseFloat(">20 mmol/L".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    if(!isFinite(low) || !isFinite(high)) {
+        out.innerHTML = '<p><strong>Значение зарегистрировано: ' + v + '</strong></p>';
+        return;
+    }
+    if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong> Высокая — почки, дегидратация.</p>';
+    else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong> Очень высокие — почечная недостаточность.</p>';
+    else out.innerHTML = '<p><strong>В пределах нормы.</strong> Норма — адекватный обмен.</p>';
+});
+</script>
+
+</body>
+</html>

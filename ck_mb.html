@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CK-MB — Справочник анализов</title>
+  <meta name="description" content="Кардиальный фермент (реже используется рутинно).">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>CK-MB</h1>
+  <p class="muted">Кардиальный фермент (реже используется рутинно).</p>
+  <nav><a href="index.html">← Назад к списку</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Описание</h2>
+    <p>Помогает при подозрении на ИМ.</p>
+  </section>
+
+  <section class="card">
+    <h2>Нормы и отклонения</h2>
+    <table>
+      <thead>
+        <tr><th>Значение</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><5 ng/mL</td><td>Норма — редко повышен.</td></tr>
+        <tr><td><5 ng/mL</td><td>Норма — низкий уровень.</td></tr>
+        <tr><td>>25 ng/mL</td><td>Повышение — повреждение сердца.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Подготовка</h2>
+    <p>По назначению врача.</p>
+  </section>
+
+  <section class="card">
+    <h2>Проверка своего результата</h2>
+    <input id="val" type="number" step="any" placeholder="Введите значение">
+    <button id="btn-check">Проверить</button>
+    <div id="out" class="muted"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Теги: ck_mb,сердце</p>
+  <p><a href="index.html">Вернуться к списку анализов</a></p>
+</footer>
+
+<script>
+document.getElementById('btn-check').addEventListener('click', function(){
+    var v = parseFloat(document.getElementById('val').value);
+    var out = document.getElementById('out');
+    if(isNaN(v)) {
+        out.innerHTML = '<p class="muted">Введите корректное число</p>';
+        return;
+    }
+    var low = parseFloat("<5 ng/mL".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    var high = parseFloat(">25 ng/mL".replace(/[^0-9.,-]/g, '').replace(',', '.'));
+    if(!isFinite(low) || !isFinite(high)) {
+        out.innerHTML = '<p><strong>Значение зарегистрировано: ' + v + '</strong></p>';
+        return;
+    }
+    if(v < low) out.innerHTML = '<p><strong>Ниже нормы.</strong> Норма — редко повышен.</p>';
+    else if(v > high) out.innerHTML = '<p><strong>Выше нормы.</strong> Повышение — повреждение сердца.</p>';
+    else out.innerHTML = '<p><strong>В пределах нормы.</strong> Норма — низкий уровень.</p>';
+});
+</script>
+
+</body>
+</html>
