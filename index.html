@@ -1,35 +1,45 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Справочник анализов — большой справочник и калькуляторы</title>
-<meta name="description" content="Справочник лабораторных анализов: нормы, подготовка и интерактивная проверка результатов. 50 популярных тестов."/>
-<meta name="keywords" content="анализы,расшифровка анализов,калькулятор анализов,глюкоза,гемоглобин,липидограмма,анализ крови"/>
-<link rel="stylesheet" href="style.css"/>
-<!-- GA placeholder: замените G-XXXXXXXXXX на ваш GA4 ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX',{anonymize_ip:true});</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Справочник анализов — нормы, расшифровка, калькуляторы</title>
+  <meta name="description" content="Справочник по лабораторным анализам: нормы, подготовка, интерактивная проверка результатов. 50+ тестов." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="site-header"><div class="container"><h1>Справочник анализов</h1><p class="lead">50+ лабораторных тестов — нормы, подготовка и интерактивная проверка результатов.</p></div></header>
-<main class="container">
-  <section class="search-card">
-    <input id="search" type="search" placeholder="Поиск по анализам (напр., глюкоза, гемоглобин)" />
-    <div id="tags" class="tags"></div>
-    <div id="results" class="results-grid">Загрузка списка анализов…</div>
-  </section>
-  <section class="info-card">
-    <h2>Как пользоваться</h2>
-    <ol>
-      <li>Введите название анализа или выберите тег.</li>
-      <li>Откройте страницу анализа, введите своё значение и получите подсказку.</li>
-      <li>Информация носит справочный характер. При отклонениях обратитесь к врачу.</li>
-    </ol>
-  </section>
-</main>
-<footer class="site-footer"><div class="container"><p>© <span id="year"></span> Справочник анализов (справочная информация).</p></div></footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-<script src="script.js"></script>
+  <header class="site-header">
+    <div class="container">
+      <h1>Справочник анализов</h1>
+      <p class="lead">Нормы, расшифровка и быстрые проверки результатов — удобно и понятно.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="search-panel">
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Например: глюкоза, гемоглобин, холестерин" aria-label="Поиск по анализам" />
+        <button id="clear">Очистить</button>
+      </div>
+      <div id="info" class="info-row">Загрузка списка анализов...</div>
+    </section>
+
+    <section id="tags" class="tags-row" aria-hidden="false"></section>
+
+    <section id="results" class="results-grid" aria-live="polite">
+      <!-- Карточки появятся здесь -->
+    </section>
+
+    <section id="debug" class="debug" aria-hidden="true"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Справочник анализов. Информация справочная — при отклонениях обратитесь к врачу.</small>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="script.js"></script>
 </body>
 </html>
