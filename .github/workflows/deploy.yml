@@ -1,4 +1,4 @@
-name: Build and publish site
+name: Build and deploy analyses site
 
 on:
   push:
@@ -18,14 +18,18 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run generator
-        env:
-          HOST: https://neverloseyoursm1le.github.io/analyses
+      - name: Run generator (optional)
         run: |
-          python3 analyses/generate.py --out analyses --host $HOST 
+          python3 generate.py --csv analyses/data.csv --out analyses
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./analyses
+          path: ./analyses
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
