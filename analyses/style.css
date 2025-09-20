@@ -1,0 +1,29 @@
+:root{--maxw:1100px;--accent:#0f62fe;--muted:#6b7280;--bg:#fbfdff}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:#07203a;margin:0;line-height:1.5}
+.container{max-width:var(--maxw);margin:18px auto;padding:0 16px}
+.site-header{background:linear-gradient(90deg,var(--accent),#0052cc);color:#fff;padding:26px;border-radius:12px;margin-bottom:18px}
+.site-header h1{margin:0;font-size:28px}
+.lead{margin-top:8px;opacity:.95}
+.search-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,.06)}
+#search{width:100%;padding:12px;border-radius:10px;border:1px solid #e6eef8;font-size:16px}
+.tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:#eef6ff;color:var(--accent);padding:6px 10px;border-radius:999px;font-size:13px;cursor:pointer;border:1px solid #dbeeff}
+.results-grid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:#fff;padding:14px;border-radius:10px;border:1px solid #eef2f7;color:inherit;text-decoration:none;display:block}
+.card h3{margin:0 0 8px 0}
+.info-card{background:#fff;padding:16px;border-radius:10px;margin-top:18px;border:1px solid #eef2f7}
+.site-footer{margin-top:20px;padding:18px 0;color:var(--muted);font-size:14px;text-align:center}
+.ranges-table{width:100%;border-collapse:collapse;margin-top:12px}
+.ranges-table th, .ranges-table td{padding:10px;border:1px solid #eef2f7;text-align:left}
+.ranges-table thead{background:#f1f5ff;color:var(--accent)}
+.ranges-table tbody tr.highlight-below{background:#fff1f0}
+.ranges-table tbody tr.highlight-normal{background:#f0fff6}
+.ranges-table tbody tr.highlight-above{background:#fff7f0}
+.calc{margin-top:12px}
+.calc input{padding:8px;border:1px solid #e6eef8;border-radius:8px;width:200px}
+.btn-check{padding:8px 12px;margin-left:8px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer}
+.calc-result{margin-top:10px;padding:8px;border-radius:8px;background:#f8fafc;border:1px solid #eef2f7}
+.muted{color:var(--muted)}
+.sex-select{margin-top:6px;margin-bottom:6px}
+@media(max-width:720px){.site-header h1{font-size:20px}}
