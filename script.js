@@ -12,7 +12,6 @@ async function loadAnalyses() {
       const cols = line.split(',');
       const obj = {};
       headers.forEach((h, i) => obj[h.trim()] = (cols[i] || '').trim());
-      // Приводим к нужному формату
       return {
         title: obj.title,
         summary: obj.summary,
@@ -30,19 +29,13 @@ async function loadAnalyses() {
 function createCard(a) {
   const el = document.createElement('a');
   el.className = 'card';
-  el.href = a.url.replace(location.origin + '/', '/');
+  el.href = a.url;
   el.innerHTML = `
     <h3>${a.title}</h3>
     <p class="muted">${a.summary}</p>
     <p style="margin-top:8px" class="muted">
       Теги: ${(a.tags || []).slice(0, 6).join(', ')}
     </p>`;
-  el.addEventListener('click', () => {
-    if (window.gtag) gtag('event', 'open_analysis', {
-      event_category: 'navigation',
-      event_label: a.slug
-    });
-  });
   return el;
 }
 
@@ -85,10 +78,6 @@ function searchAndRender(list, q) {
     return;
   }
   filtered.forEach(a => root.appendChild(createCard(a)));
-  if (window.gtag) gtag('event', 'search', {
-    event_category: 'search',
-    event_label: q
-  });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
