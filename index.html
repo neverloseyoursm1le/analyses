@@ -1,79 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Справочник анализов</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Справочник анализов — нормы, расшифровка, калькуляторы</title>
+  <meta name="description" content="Справочник по лабораторным анализам: нормы, подготовка, интерактивная проверка результатов. 50+ тестов." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Справочник анализов</h1>
-  <ul>
-    <li><a href="glucose.html">Глюкоза (натощак)</a> — Ключевой тест для диагностики диабета.</li>
-    <li><a href="hba1c.html">HbA1c (гликированный Hb)</a> — Отражает средний уровень глюкозы за 2–3 месяца.</li>
-    <li><a href="hemoglobin.html">Гемоглобин (Hb)</a> — Переносчик кислорода — важный маркер анемии.</li>
-    <li><a href="rbc.html">Эритроциты (RBC)</a> — Количество красных клеток крови.</li>
-    <li><a href="wbc.html">Лейкоциты (WBC)</a> — Иммунный индикатор — инфекция/воспаление.</li>
-    <li><a href="platelets.html">Тромбоциты (PLT)</a> — Участвуют в свёртывании крови.</li>
-    <li><a href="esr.html">СОЭ (ESR)</a> — Неспецифический маркер воспаления.</li>
-    <li><a href="crp.html">C-реактивный белок (CRP)</a> — Быстрый маркер воспаления.</li>
-    <li><a href="alt.html">АЛТ (ALT)</a> — Показатель повреждения печени (гепатоциты).</li>
-    <li><a href="ast.html">АСТ (AST)</a> — Фермент печени и мышц.</li>
-    <li><a href="bilirubin.html">Билирубин общий/прямой</a> — Оценивает желтуху и печёночный обмен.</li>
-    <li><a href="albumin.html">Альбумин</a> — Основной белок сыворотки — статус питания.</li>
-    <li><a href="total-protein.html">Общий белок</a> — Сумма белковых фракций крови.</li>
-    <li><a href="creatinine.html">Креатинин</a> — Показатель функции почек.</li>
-    <li><a href="egfr.html">eGFR</a> — Расчёт функции почек по креатинину.</li>
-    <li><a href="urea.html">Мочевина</a> — Метаболический маркер азотистого обмена.</li>
-    <li><a href="ferritin.html">Ферритин</a> — Запасы железа в организме.</li>
-    <li><a href="iron.html">Железо сывороточное</a> — Плазменное железо — динамический показатель.</li>
-    <li><a href="b12.html">Витамин B12</a> — Дефицит вызывает неврологию/анемию.</li>
-    <li><a href="folate.html">Фолиевая кислота</a> — Важна для кроветворения и беременности.</li>
-    <li><a href="vitamin-d25.html">Витамин D (25-OH)</a> — Оценка статуса витамин D.</li>
-    <li><a href="calcium.html">Кальций общий</a> — Минерал для костей и нервов.</li>
-    <li><a href="magnesium.html">Магний</a> — Минерал для сердца и мышц.</li>
-    <li><a href="sodium.html">Натрий (Na)</a> — Электролит водно-электролитного баланса.</li>
-    <li><a href="potassium.html">Калий (K)</a> — Критически важен для сердца.</li>
-    <li><a href="chloride.html">Хлориды (Cl)</a> — Поддерживают кислотно-щелочной баланс.</li>
-    <li><a href="pt_inr.html">Протромбиновое время / INR</a> — Оценивает свёртываемость и контроль антикоагулянтов.</li>
-    <li><a href="d_dimer.html">D-димер</a> — Маркер тромбообразования/фибринолиза.</li>
-    <li><a href="troponin_i.html">Тропонин I</a> — Кардиальный маркер при инфаркте миокарда.</li>
-    <li><a href="ck_mb.html">CK-MB</a> — Кардиальный фермент (реже используется рутинно).</li>
-    <li><a href="troponin_t.html">Тропонин T</a> — Альтернативный кардиальный маркер.</li>
-    <li><a href="psa.html">PSA (простат-специфический антиген)</a> — Скрининг простаты и мониторинг РПЖ.</li>
-    <li><a href="hbsag.html">HBsAg (гепатит B)</a> — Скрининг на вирус гепатита B.</li>
-    <li><a href="hcv_ab.html">Антитела к HCV</a> — Скрининг на вирусный гепатит C.</li>
-    <li><a href="hiv_ab.html">Антитела к HIV</a> — Скрининг на ВИЧ-инфекцию.</li>
-    <li><a href="urine_routine.html">Общий анализ мочи (ОАМ)</a> — Физико-химические и микроскопические показатели мочи.</li>
-    <li><a href="urine_culture.html">Посев мочи</a> — Определяет бактерии и антибиотикочувствительность.</li>
-    <li><a href="stool_occult.html">Скрытая кровь в кале (FOBT)</a> — Скрининг на кровопотери ЖКТ.</li>
-    <li><a href="stool_ova.html">Копрологическое исследование (яйца/цисты)</a> — Ищут паразитов в кале.</li>
-    <li><a href="fecal_calprotectin.html">Кальпротектин фекалий</a> — Маркер воспаления кишечника.</li>
-    <li><a href="lipase.html">Липаза</a> — Специфичный маркер поджелудочной железы.</li>
-    <li><a href="amylase.html">Амилаза</a> — Фермент поджелудочной/слюнных желёз.</li>
-    <li><a href="insulin.html">Инсулин</a> — Исследуется при подозрении на инсулинрезистентность.</li>
-    <li><a href="cortisol.html">Кортизол</a> — Гормон стресса; суточные колебания.</li>
-    <li><a href="tsh.html">TSH</a> — Скрининг функции щитовидной железы.</li>
-    <li><a href="free_t4.html">Свободный T4</a> — Активная фракция тироксина.</li>
-    <li><a href="anti_tpo.html">Антитела к ТПО</a> — Маркер аутоиммунного тиреоидита.</li>
-    <li><a href="hba.html">Гемоглобин A (замена)</a> — (служебная строка)ред.</li>
-    <li><a href="vitamin_b1.html">Витамин B1 (тиамин)</a> — Минерал для нервной системы.</li>
-    <li><a href="vitamin_b6.html">Витамин B6</a> — Участвует в метаболизме аминокислот.</li>
-    <li><a href="vitamin_a.html">Витамин A</a> — Жирорастворимый витамин для зрения.</li>
-    <li><a href="vitamin_e.html">Витамин E</a> — Антиоксидант, влияет на нейроны.</li>
-    <li><a href="fsh.html">FSH</a> — Репродуктивный гормон для оценки фертильности.</li>
-    <li><a href="lh.html">LH</a> — Гормон овуляции и мужской функции.</li>
-    <li><a href="estradiol.html">Эстрадиол</a> — Женский половой гормон; зависит от цикла.</li>
-    <li><a href="testosterone.html">Тестостерон</a> — Половой гормон у мужчин и женщин.</li>
-    <li><a href="prolactin.html">Пролактин</a> — Гормон лактации; повышение мешает фертильности.</li>
-    <li><a href="creatine_kinase.html">КК (CK)</a> — Фермент повреждения мышц.</li>
-    <li><a href="ammonia.html">Аммиак</a> — Повышение при печёночной энцефалопатии.</li>
-    <li><a href="homocysteine.html">Гомоцистеин</a> — Маркер риска ССЗ, связан с B-витаминами.</li>
-    <li><a href="ferritin_s.html">Ферритин (женщины)</a> — Отдельный контроль запасов железа у женщин.</li>
-    <li><a href="uric_acid.html">Мочевая кислота</a> — Риск подагры при повышении.</li>
-    <li><a href="lp(a).html">Липопротеин(a)</a> — Независимый фактор риска ССЗ.</li>
-    <li><a href="aptt.html">APTT</a> — Активированное частичное тромбопределение.</li>
-    <li><a href="vitamin_k.html">Витамин K</a> — Важен для свертывания крови.</li>
-    <li><a href="fibrinogen.html">Фибриноген</a> — Коагуляционный белок; при воспалении растёт.</li>
-  </ul>
+  <header class="site-header">
+    <div class="container">
+      <h1>Справочник анализов</h1>
+      <p class="lead">Нормы, расшифровка и быстрые проверки результатов — удобно и понятно.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="search-panel">
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Например: глюкоза, гемоглобин, холестерин" aria-label="Поиск по анализам" />
+        <button id="clear">Очистить</button>
+      </div>
+      <div id="info" class="info-row">Загрузка списка анализов...</div>
+    </section>
+
+    <section id="tags" class="tags-row" aria-hidden="false"></section>
+
+    <section id="results" class="results-grid" aria-live="polite">
+      <!-- Карточки появятся здесь -->
+    </section>
+
+    <section id="debug" class="debug" aria-hidden="true"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Справочник анализов. Информация справочная — при отклонениях обратитесь к врачу.</small>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="script.js"></script>
 </body>
 </html>
