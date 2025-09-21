@@ -21,7 +21,7 @@ jobs:
         run: pip install pandas jinja2
 
       - name: Generate site
-        run: python3 analyses/generate.py --out analyses --host ${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: python3 analyses/generate.py --out . --host ${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
