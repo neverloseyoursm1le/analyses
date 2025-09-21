@@ -118,7 +118,7 @@ def main():
 
     # путь к data.csv относительно этого скрипта
     script_dir = Path(__file__).resolve().parent
-    data_file = script_dir / "analyses" / "data.csv"
+    data_file = script_dir / "data.csv"
 
     items = []
 
@@ -155,3 +155,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
