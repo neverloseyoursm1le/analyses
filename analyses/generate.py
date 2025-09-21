@@ -152,12 +152,13 @@ def main():
         json.dumps(items, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
+
+    # копируем style.css, только если он реально в другом месте
     if style_file.exists():
-        shutil.copy(style_file, outdir / "style.css")
+        dst_style = outdir / "style.css"
+        if style_file.resolve() != dst_style.resolve():
+            shutil.copy(style_file, dst_style)
+
 
 if __name__ == "__main__":
     main()
-
-
-
-
