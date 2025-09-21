@@ -160,27 +160,32 @@ def main():
             shutil.copy(style_file, dst_style)
             
     # генерируем index.html со списком анализов
-    index_html = """<!DOCTYPE html>
+index_html = """<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Справочник анализов</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Справочник анализов</h1>
+<header><h1>Справочник анализов</h1></header>
+<main>
   <ul>
 """
-    for item in items:
-        index_html += f'    <li><a href="{item["slug"]}.html">{item["title"]}</a> — {item["summary"]}</li>\n'
+for item in items:
+    index_html += f'    <li><a href="{item["slug"]}.html">{item["title"]}</a> — {item["summary"]}</li>\n'
 
-    index_html += """  </ul>
+index_html += """  </ul>
+</main>
 </body>
-</html>"""
+</html>
+"""
 
-    (outdir / "index.html").write_text(index_html, encoding="utf-8")
+(outdir / "index.html").write_text(index_html, encoding="utf-8")
 
 
 if __name__ == "__main__":
     main()
+
 
