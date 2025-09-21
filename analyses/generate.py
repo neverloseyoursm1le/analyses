@@ -119,7 +119,7 @@ def main():
     # путь к data.csv относительно этого скрипта
     script_dir = Path(__file__).resolve().parent
     data_file = script_dir / "data.csv"
-
+    style_file = script_dir / "style.css"
     items = []
 
     with data_file.open(newline="", encoding="utf-8") as f:
@@ -155,4 +155,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
