@@ -160,7 +160,7 @@ def main():
             shutil.copy(style_file, dst_style)
             
     # генерируем index.html со списком анализов
-index_html = """<!DOCTYPE html>
+    index_html = """<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -187,5 +187,6 @@ index_html += """  </ul>
 
 if __name__ == "__main__":
     main()
+
 
 
