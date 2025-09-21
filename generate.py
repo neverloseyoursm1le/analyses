@@ -3,7 +3,8 @@ import argparse
 from pathlib import Path
 import json
 
-def render_page(row, host):
+
+def render_page(row, host: str) -> str:
     """Генерация HTML-страницы для одного анализа"""
     slug = row["slug"].strip()
     title = row["title"].strip()
@@ -18,7 +19,7 @@ def render_page(row, host):
     prep = row["prep"].strip()
     tags = row["tags"].strip()
 
-    html = f"""<!DOCTYPE html>
+    return f"""<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -95,21 +96,33 @@ document.getElementById('btn-check').addEventListener('click', function(){{
 </body>
 </html>
 """
-    return html
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", default="analyses", help="Выходная директория")
-    parser.add_argument("--host", default="", help="Хост для ссылок (например, yourname.github.io/analyses)")
+    parser.add_argument(
+        "--out",
+        default="analyses",
+        help="Выходная директория"
+    )
+    parser.add_argument(
+        "--host",
+        default="",
+        help="Хост для ссылок (например, yourname.github.io/analyses)"
+    )
     args = parser.parse_args()
 
+    # директория для вывода
     outdir = Path(args.out)
     outdir.mkdir(parents=True, exist_ok=True)
 
+    # путь к data.csv относительно этого скрипта
+    script_dir = Path(__file__).resolve().parent
+    data_file = script_dir / "data.csv"
+
     items = []
 
-    with open("analyses/data.csv", newline="", encoding="utf-8") as f:
+    with data_file.open(newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="|")
         for row in reader:
             slug = row["slug"].strip()
@@ -131,13 +144,15 @@ def main():
 
             # генерируем HTML-страницу
             page_html = render_page(row, args.host)
-            with open(outdir / f"{slug}.html", "w", encoding="utf-8") as outf:
-                outf.write(page_html)
+            (outdir / f"{slug}.html").write_text(page_html, encoding="utf-8")
 
     # сохраняем JSON для поиска
-    with open(outdir / "analyses.json", "w", encoding="utf-8") as jf:
-        json.dump(items, jf, ensure_ascii=False, indent=2)
+    (outdir / "analyses.json").write_text(
+        json.dumps(items, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
 
 
 if __name__ == "__main__":
     main()
+
