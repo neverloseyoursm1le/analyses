@@ -2,6 +2,7 @@ import csv
 import argparse
 from pathlib import Path
 import json
+import shutil
 
 
 def render_page(row, host: str) -> str:
@@ -156,6 +157,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
