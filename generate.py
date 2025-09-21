@@ -158,7 +158,29 @@ def main():
         dst_style = outdir / "style.css"
         if style_file.resolve() != dst_style.resolve():
             shutil.copy(style_file, dst_style)
+            
+    # генерируем index.html со списком анализов
+    index_html = """<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Справочник анализов</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Справочник анализов</h1>
+  <ul>
+"""
+    for item in items:
+        index_html += f'    <li><a href="{item["slug"]}.html">{item["title"]}</a> — {item["summary"]}</li>\n'
+
+    index_html += """  </ul>
+</body>
+</html>"""
+
+    (outdir / "index.html").write_text(index_html, encoding="utf-8")
 
 
 if __name__ == "__main__":
     main()
+
