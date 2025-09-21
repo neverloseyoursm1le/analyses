@@ -151,9 +151,11 @@ def main():
         json.dumps(items, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
-
+    if style_file.exists():
+        shutil.copy(style_file, outdir / "style.css")
 
 if __name__ == "__main__":
     main()
+
 
 
