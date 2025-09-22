@@ -21,7 +21,7 @@ jobs:
         run: pip install pandas jinja2
 
       - name: Generate site
-        run: python3 analyses/generate.py --out . --host neverloseyoursm1le.github.io/analyses
+        run: python3 analyses/generate.py --out .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
