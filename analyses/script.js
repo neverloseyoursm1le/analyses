@@ -1,214 +1,231 @@
-// script.js — search + checker
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    if (document.getElementById('search')) initSearch();
-    if (document.getElementById('checker')) initChecker();
-  } catch (e) {
-    console.error(e);
+// script.js — reliable search + cards renderer + per-page checker
+// Put this file next to generate.py so generator copies it to output
+
+(function(){
+  // small helpers
+  function escapeHtml(s){
+    return String(s || '')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#039;');
   }
-});
+  function debounce(fn, t=150){ let to=null; return (...a)=>{ clearTimeout(to); to=setTimeout(()=>fn(...a), t); }; }
 
-/* ================== SEARCH (index) ================== */
-async function initSearch(){
-  let list = [];
-  try {
-    const r = await fetch('analyses.json', {cache:'no-store'});
-    if (!r.ok) throw new Error('analyses.json not found');
-    list = await r.json();
-  } catch (e) {
-    console.error('Failed to load analyses.json', e);
-    document.getElementById('results').innerHTML = '<p class="muted">Список недоступен</p>';
-    return;
+  // Try loading analyses.json from several likely paths (robust for different deploy layouts)
+  async function loadAnalysesJson(){
+    const candidates = [
+      'analyses.json',
+      './analyses.json',
+      'analyses/analyses.json',
+      './analyses/analyses.json',
+      '/analyses/analyses.json'
+    ];
+    for(const p of candidates){
+      try{
+        const r = await fetch(p, {cache:'no-store'});
+        if(!r.ok) continue;
+        const j = await r.json();
+        return j;
+      }catch(e){
+        // try next
+      }
+    }
+    throw new Error('analyses.json not found in known locations');
   }
 
-  const input = document.getElementById('search');
-  const clear = document.getElementById('clear');
-  const tagsRoot = document.getElementById('tags');
-  const resultsRoot = document.getElementById('results');
+  // Create single card element
+  function createCard(item){
+    const a = document.createElement('a');
+    a.className = 'card';
+    // item.url is usually 'slug/' or 'slug.html'
+    a.href = item.url || (item.slug ? (item.slug + '/') : '#');
+    a.innerHTML = `<h3>${escapeHtml(item.title)}</h3>
+                   <p class="muted">${escapeHtml(item.summary)}</p>
+                   <p class="meta">${escapeHtml((item.tags||[]).slice(0,6).join(', '))}</p>`;
+    return a;
+  }
 
-  function renderCards(arr){
-    resultsRoot.innerHTML = '';
-    if (arr.length === 0) {
-      resultsRoot.innerHTML = '<p class="muted">Ничего не найдено</p>';
+  // Render full list
+  function renderAll(list, root){
+    root.innerHTML = '';
+    if(!list || list.length === 0){
+      root.innerHTML = '<p class="muted">Список недоступен</p>';
       return;
     }
-    arr.forEach(a => {
-      const el = document.createElement('a');
-      el.className = 'card';
-      el.href = a.url;
-      el.innerHTML = `<h3>${escapeHtml(a.title)}</h3><p class="muted">${escapeHtml(a.summary)}</p><p class="meta">${(a.tags||[]).slice(0,6).join(', ')}</p>`;
-      resultsRoot.appendChild(el);
-    });
+    list.forEach(it => root.appendChild(createCard(it)));
   }
 
-  function renderTags(){
-    const map = {};
-    list.forEach(a => (a.tags||[]).forEach(t => map[t] = (map[t]||0)+1));
-    const sorted = Object.keys(map).sort((x,y)=>map[y]-map[x]).slice(0,24);
+  // Search/filter
+  function makeSearch(list){
+    const input = document.getElementById('search');
+    const clear = document.getElementById('clear');
+    const tagsRoot = document.getElementById('tags');
+    const resultsRoot = document.getElementById('results');
+
+    // Tags
+    const tagCounts = {};
+    list.forEach(a => (a.tags||[]).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1));
+    const sortedTags = Object.keys(tagCounts).sort((x,y) => tagCounts[y]-tagCounts[x]).slice(0,32);
     tagsRoot.innerHTML = '';
-    sorted.forEach(t=>{
-      const b = document.createElement('button'); b.className='tag'; b.textContent=t;
-      b.addEventListener('click', ()=>{ input.value = t; doSearch(); });
+    sortedTags.forEach(t=>{
+      const b = document.createElement('button');
+      b.className = 'tag';
+      b.textContent = t;
+      b.addEventListener('click', ()=>{ input.value = t; input.dispatchEvent(new Event('input')); });
       tagsRoot.appendChild(b);
     });
+
+    function doSearch(){
+      const q = input.value.trim().toLowerCase();
+      if(q.length < 2){
+        renderAll(list, resultsRoot);
+        return;
+      }
+      const filtered = list.filter(a => ((a.title||'') + ' ' + (a.summary||'') + ' ' + (a.tags||[]).join(' ')).toLowerCase().includes(q));
+      if(filtered.length === 0){
+        resultsRoot.innerHTML = '<p class="muted">Ничего не найдено</p>';
+        return;
+      }
+      resultsRoot.innerHTML = '';
+      filtered.forEach(it => resultsRoot.appendChild(createCard(it)));
+    }
+
+    input.addEventListener('input', debounce(doSearch, 120));
+    clear.addEventListener('click', ()=>{ input.value=''; input.dispatchEvent(new Event('input')); });
+    // initial
+    renderAll(list, resultsRoot);
   }
 
-  function doSearch(){
-    const q = input.value.trim().toLowerCase();
-    if (q.length < 2){ renderCards(list); return; }
-    const filtered = list.filter(a => ( (a.title||'') + ' ' + (a.summary||'') + ' ' + (a.tags||[]).join(' ') ).toLowerCase().includes(q));
-    renderCards(filtered);
-  }
+  // Per-page checker: numeric & textual heuristics
+  function initCheckerOnPage(){
+    const root = document.getElementById('checker');
+    if(!root) return;
 
-  input.addEventListener('input', debounce(doSearch, 150));
-  clear.addEventListener('click', ()=>{ input.value=''; doSearch(); });
-  renderTags();
-  renderCards(list);
-}
+    const input = document.getElementById('val');
+    const btn = document.getElementById('btn-check');
+    const out = document.getElementById('out');
 
-/* ================== CHECKER (per-page) ================== */
-function initChecker(){
-  const root = document.getElementById('checker');
-  if(!root) return;
-  const btn = document.getElementById('btn-check');
-  const input = document.getElementById('val');
-  const out = document.getElementById('out');
+    // read dataset attributes (generated by generate.py)
+    const midMin = parseFloatSafe(root.dataset.midMin);
+    const midMax = parseFloatSafe(root.dataset.midMax);
+    const lowVal = parseFloatSafe(root.dataset.low);
+    const highVal = parseFloatSafe(root.dataset.high);
+    const normLowRaw = root.dataset.normLow || '';
+    const normMidRaw = root.dataset.normMid || '';
+    const normHighRaw = root.dataset.normHigh || '';
+    const textBelow = root.dataset.below || '';
+    const textNormal = root.dataset.normal || '';
+    const textAbove = root.dataset.above || '';
 
-  // read dataset
-  const midMin = tryParseFloat(root.dataset.midMin);
-  const midMax = tryParseFloat(root.dataset.midMax);
-  const lowVal = tryParseFloat(root.dataset.low);
-  const highVal = tryParseFloat(root.dataset.high);
-  const normLow = root.dataset.normLow || '';
-  const normMid = root.dataset.normMid || '';
-  const normHigh = root.dataset.normHigh || '';
-  const textBelow = root.dataset.below || '';
-  const textNormal = root.dataset.normal || '';
-  const textAbove = root.dataset.above || '';
+    btn.addEventListener('click', ()=> doCheck(input.value));
+    input.addEventListener('keydown', (e)=> { if(e.key === 'Enter') doCheck(input.value); });
 
-  btn.addEventListener('click', ()=> doCheck(input.value));
-  input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') doCheck(input.value); });
-
-  function doCheck(raw){
-    const vTrim = String(raw || '').trim();
-    if(vTrim === ''){
-      out.innerHTML = '<p class="muted">Введите значение</p>';
-      out.className = 'checker-out muted';
-      return;
-    }
-    // try numeric
-    const num = parseFloat(vTrim.replace(',', '.'));
-    if(!isNaN(num)){
-      const res = evaluateNumeric(num, midMin, midMax, lowVal, highVal, normLow, normMid, normHigh);
-      showResultNumeric(res, num);
-    } else {
-      // categorical/textual
-      const res = evaluateTextual(vTrim.toLowerCase(), textBelow, textNormal, textAbove, normLow, normMid, normHigh);
-      showResultTextual(res, vTrim);
-    }
-  }
-
-  function evaluateNumeric(num, midMin, midMax, lowVal, highVal, normLowRaw, normMidRaw, normHighRaw){
-    // priority: if mid range available -> use it
-    if(isFinite(midMin) && isFinite(midMax)){
-      if(num < midMin) return {cat:'below', text: textBelow};
-      if(num > midMax) return {cat:'above', text: textAbove};
-      return {cat:'normal', text: textNormal};
+    function parseFloatSafe(v){
+      if(!v && v !== 0) return NaN;
+      const n = parseFloat(String(v).replace(',', '.'));
+      return Number.isFinite(n) ? n : NaN;
     }
 
-    // if both low and high numeric thresholds available
-    if(isFinite(lowVal) && isFinite(highVal)){
-      if(num < lowVal) return {cat:'below', text: textBelow};
-      if(num > highVal) return {cat:'above', text: textAbove};
-      return {cat:'normal', text: textNormal};
-    }
-
-    // if low bound only (<x) was provided
-    if(isFinite(lowVal)){
-      if(normLowRaw && normLowRaw.trim().startsWith('<')){
-        if(num < lowVal) return {cat:'below', text: textBelow};
-        return {cat:'normal', text: textNormal || 'Вне диапазонов — обратитесь к врачу для уточнения.'};
+    function doCheck(raw){
+      const val = String(raw||'').trim();
+      if(!val){
+        out.innerHTML = '<p class="muted">Введите значение</p>'; out.className='checker-out muted'; return;
+      }
+      // try number first
+      const num = parseFloat(val.replace(',', '.'));
+      if(!Number.isNaN(num)){
+        const res = evaluateNumeric(num);
+        showResultNumeric(res, num);
+      } else {
+        const res = evaluateText(val.toLowerCase());
+        showResultText(res, val);
       }
     }
 
-    // if high bound only (>x)
-    if(isFinite(highVal)){
-      if(normHighRaw && normHighRaw.trim().startsWith('>')){
-        if(num > highVal) return {cat:'above', text: textAbove};
-        return {cat:'normal', text: textNormal || 'Вне диапазонов — обратитесь к врачу для уточнения.'};
+    function evaluateNumeric(n){
+      // prefer mid range if present
+      if(Number.isFinite(midMin) && Number.isFinite(midMax)){
+        if(n < midMin) return {cat:'below', text: textBelow};
+        if(n > midMax) return {cat:'above', text: textAbove};
+        return {cat:'normal', text: textNormal};
+      }
+      // else use low/high numeric bounds
+      if(Number.isFinite(lowVal) && Number.isFinite(highVal)){
+        if(n < lowVal) return {cat:'below', text:textBelow};
+        if(n > highVal) return {cat:'above', text:textAbove};
+        return {cat:'normal', text:textNormal};
+      }
+      // single-side heuristics (<x or >x)
+      if(Number.isFinite(lowVal) && normLowRaw.trim().startsWith('<')){
+        if(n < lowVal) return {cat:'below', text:textBelow};
+        return {cat:'normal', text:textNormal};
+      }
+      if(Number.isFinite(highVal) && normHighRaw.trim().startsWith('>')){
+        if(n > highVal) return {cat:'above', text:textAbove};
+        return {cat:'normal', text:textNormal};
+      }
+      return {cat:'unknown', text:'Не удалось автоматически классифицировать значение. Уточните у врача.'};
+    }
+
+    function evaluateText(s){
+      // basic detection
+      if(s.includes('полож') || s.includes('+') || s.includes('positive')) return {cat:'above', text:textAbove || 'Положительный результат — обратитесь к врачу.'};
+      if(s.includes('отриц') || s.includes('негат') || s.includes('нет')) return {cat:'normal', text:textNormal || 'Отрицательный — в пределах ожидаемого.'};
+      // check phrases in CSV texts
+      if(textNormal && s.includes(textNormal.toLowerCase())) return {cat:'normal', text:textNormal};
+      if(textAbove && s.includes(textAbove.toLowerCase())) return {cat:'above', text:textAbove};
+      if(textBelow && s.includes(textBelow.toLowerCase())) return {cat:'below', text:textBelow};
+      return {cat:'unknown', text:'Не удалось автоматически классифицировать текстовый результат.'};
+    }
+
+    function showResultNumeric(res, n){
+      if(res.cat === 'below'){
+        out.innerHTML = `<div class="status status-low">Ниже нормы (введено: ${escapeHtml(n)})</div><p>${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-low';
+      } else if(res.cat === 'above'){
+        out.innerHTML = `<div class="status status-high">Выше нормы (введено: ${escapeHtml(n)})</div><p>${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-high';
+      } else if(res.cat === 'normal'){
+        out.innerHTML = `<div class="status status-normal">В пределах нормы (введено: ${escapeHtml(n)})</div><p>${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-normal';
+      } else {
+        out.innerHTML = `<div class="status status-unknown">Невозможно автоматически определить</div><p>${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-unknown';
       }
     }
 
-    // fallback: cannot classify
-    return {cat:'unknown', text: 'Не удалось автоматически классифицировать значение. Уточните у врача.'};
-  }
-
-  function evaluateTextual(inputLower, textBelow, textNormal, textAbove, normLowRaw, normMidRaw, normHighRaw){
-    // common words detection
-    if(inputLower.includes('полож')) {
-      // positive
-      // if normal contains отриц -> positive means abnormal
-      if(textNormal.toLowerCase().includes('отриц')) return {cat:'above', text:textAbove || 'Положительный результат — обратитесь к врачу.'};
-      return {cat:'above', text: textAbove || 'Положительный результат — возможное отклонение.'};
-    }
-    if(inputLower.includes('отриц') || inputLower.includes('нет') || inputLower.includes('-негат')) {
-      return {cat:'normal', text: textNormal || 'Результат в пределах нормы.'};
-    }
-    // exact match against provided normal/below/above words
-    if(textNormal && inputLower.includes(textNormal.toLowerCase())) return {cat:'normal', text: textNormal};
-    if(textBelow && inputLower.includes(textBelow.toLowerCase())) return {cat:'below', text: textBelow};
-    if(textAbove && inputLower.includes(textAbove.toLowerCase())) return {cat:'above', text: textAbove};
-
-    return {cat:'unknown', text: 'Не удалось автоматически классифицировать текстовый результат. Уточните у врача.'};
-  }
-
-  function showResultNumeric(res, num){
-    if(res.cat === 'below'){
-      out.innerHTML = `<div class="status status-low">Ниже нормы (введено: ${num})</div><p>${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-low';
-    } else if(res.cat === 'above'){
-      out.innerHTML = `<div class="status status-high">Выше нормы (введено: ${num})</div><p>${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-high';
-    } else if(res.cat === 'normal'){
-      out.innerHTML = `<div class="status status-normal">В пределах нормы (введено: ${num})</div><p>${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-normal';
-    } else {
-      out.innerHTML = `<div class="status status-unknown">Невозможно определить</div><p>${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-unknown';
+    function showResultText(res, raw){
+      if(res.cat === 'below'){
+        out.innerHTML = `<div class="status status-low">Интерпретация: возможно ниже нормы</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-low';
+      } else if(res.cat === 'above'){
+        out.innerHTML = `<div class="status status-high">Интерпретация: возможно выше нормы</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-high';
+      } else if(res.cat === 'normal'){
+        out.innerHTML = `<div class="status status-normal">В пределах нормы</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-normal';
+      } else {
+        out.innerHTML = `<div class="status status-unknown">Невозможно автоматически классифицировать</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text || '')}</p>`; out.className='checker-out status-unknown';
+      }
     }
   }
 
-  function showResultTextual(res, raw){
-    if(res.cat === 'below'){
-      out.innerHTML = `<div class="status status-low">Интерпретация: возможное отклонение</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-low';
-    } else if(res.cat === 'above'){
-      out.innerHTML = `<div class="status status-high">Интерпретация: возможное отклонение</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-high';
-    } else if(res.cat === 'normal'){
-      out.innerHTML = `<div class="status status-normal">В пределах нормы</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-normal';
-    } else {
-      out.innerHTML = `<div class="status status-unknown">Невозможно автоматически классифицировать</div><p>Введено: ${escapeHtml(raw)} — ${escapeHtml(res.text)}</p>`;
-      out.className = 'checker-out status-unknown';
+  // If we're on index page -> init search
+  async function initIfIndex(){
+    const searchEl = document.getElementById('search');
+    const resultsEl = document.getElementById('results');
+    if(!searchEl || !resultsEl) return false;
+    try{
+      const list = await loadAnalysesJson();
+      makeSearch(list);
+      return true;
+    }catch(e){
+      console.error('Failed to load analyses.json:', e);
+      resultsEl.innerHTML = '<p class="muted">Список недоступен</p>';
+      return false;
     }
   }
 
-  function tryParseFloat(v){
-    const n = parseFloat(String(v || '').replace(',', '.'));
-    return isNaN(n) ? NaN : n;
-  }
+  document.addEventListener('DOMContentLoaded', async ()=>{
+    // index page
+    await initIfIndex();
+    // checker on per-page analysis
+    initCheckerOnPage();
+  });
 
-  function isFinite(v){ return typeof v === 'number' && !Number.isNaN(v) && Number.isFinite(v); }
-
-  function escapeHtml(s){
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  function debounce(f, t){ let to=null; return (...a)=>{ clearTimeout(to); to=setTimeout(()=>f(...a), t); }; }
-}
+})();
