@@ -1,45 +1,86 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Справочник анализов — нормы, расшифровка, калькуляторы</title>
-  <meta name="description" content="Справочник по лабораторным анализам: нормы, подготовка, интерактивная проверка результатов. 50+ тестов." />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Справочник анализов</title>
+<meta name="description" content="Справочник лабораторных анализов — нормы, что значит 'ниже/выше нормы', подготовка.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Справочник анализов</h1>
-      <p class="lead">Нормы, расшифровка и быстрые проверки результатов — удобно и понятно.</p>
-    </div>
-  </header>
+<header class="site-header"><div class="container"><h1>Справочник анализов</h1><p class="lead">Найдите анализ и проверьте результат</p></div></header>
+<main class="container">
+  <section class="results-grid">
+<a class="card" href="glucose/"><h3>Глюкоза (натощак)</h3><p class="muted">Ключевой тест для диагностики диабета.</p><p class="meta">глюкоза, диабет, nat</p></a>
+<a class="card" href="hba1c/"><h3>HbA1c (гликированный Hb)</h3><p class="muted">Отражает средний уровень глюкозы за 2–3 месяца.</p><p class="meta">HbA1c, гликированный</p></a>
+<a class="card" href="hemoglobin/"><h3>Гемоглобин (Hb)</h3><p class="muted">Переносчик кислорода — важный маркер анемии.</p><p class="meta">гемоглобин, анемия</p></a>
+<a class="card" href="rbc/"><h3>Эритроциты (RBC)</h3><p class="muted">Количество красных клеток крови.</p><p class="meta">эритроциты, кровь</p></a>
+<a class="card" href="wbc/"><h3>Лейкоциты (WBC)</h3><p class="muted">Иммунный индикатор — инфекция/воспаление.</p><p class="meta">лейкоциты, воспаление</p></a>
+<a class="card" href="platelets/"><h3>Тромбоциты (PLT)</h3><p class="muted">Участвуют в свёртывании крови.</p><p class="meta">тромбоциты, свертывание</p></a>
+<a class="card" href="esr/"><h3>СОЭ (ESR)</h3><p class="muted">Неспецифический маркер воспаления.</p><p class="meta">soe, esr, воспаление</p></a>
+<a class="card" href="crp/"><h3>C-реактивный белок (CRP)</h3><p class="muted">Быстрый маркер воспаления.</p><p class="meta">crp, воспаление</p></a>
+<a class="card" href="alt/"><h3>АЛТ (ALT)</h3><p class="muted">Показатель повреждения печени (гепатоциты).</p><p class="meta">alt, печень</p></a>
+<a class="card" href="ast/"><h3>АСТ (AST)</h3><p class="muted">Фермент печени и мышц.</p><p class="meta">ast, печень</p></a>
+<a class="card" href="bilirubin/"><h3>Билирубин общий/прямой</h3><p class="muted">Оценивает желтуху и печёночный обмен.</p><p class="meta">билирубин, печень</p></a>
+<a class="card" href="albumin/"><h3>Альбумин</h3><p class="muted">Основной белок сыворотки — статус питания.</p><p class="meta">альбумин, питание</p></a>
+<a class="card" href="total-protein/"><h3>Общий белок</h3><p class="muted">Сумма белковых фракций крови.</p><p class="meta">белок, сыворотка</p></a>
+<a class="card" href="creatinine/"><h3>Креатинин</h3><p class="muted">Показатель функции почек.</p><p class="meta">креатинин, почки</p></a>
+<a class="card" href="egfr/"><h3>eGFR</h3><p class="muted">Расчёт функции почек по креатинину.</p><p class="meta">egfr, почки</p></a>
+<a class="card" href="urea/"><h3>Мочевина</h3><p class="muted">Метаболический маркер азотистого обмена.</p><p class="meta">мочевина, почки</p></a>
+<a class="card" href="ferritin/"><h3>Ферритин</h3><p class="muted">Запасы железа в организме.</p><p class="meta">ферритин, железо</p></a>
+<a class="card" href="iron/"><h3>Железо сывороточное</h3><p class="muted">Плазменное железо — динамический показатель.</p><p class="meta">железо, анемия</p></a>
+<a class="card" href="b12/"><h3>Витамин B12</h3><p class="muted">Дефицит вызывает неврологию/анемию.</p><p class="meta">b12, витамин</p></a>
+<a class="card" href="folate/"><h3>Фолиевая кислота</h3><p class="muted">Важна для кроветворения и беременности.</p><p class="meta">фолат, фолиевая</p></a>
+<a class="card" href="vitamin-d25/"><h3>Витамин D (25-OH)</h3><p class="muted">Оценка статуса витамин D.</p><p class="meta">vitamin_d, витамин_d25</p></a>
+<a class="card" href="calcium/"><h3>Кальций общий</h3><p class="muted">Минерал для костей и нервов.</p><p class="meta">кальций, минералы</p></a>
+<a class="card" href="magnesium/"><h3>Магний</h3><p class="muted">Минерал для сердца и мышц.</p><p class="meta">магний, минералы</p></a>
+<a class="card" href="sodium/"><h3>Натрий (Na)</h3><p class="muted">Электролит водно-электролитного баланса.</p><p class="meta">натрий, электролиты</p></a>
+<a class="card" href="potassium/"><h3>Калий (K)</h3><p class="muted">Критически важен для сердца.</p><p class="meta">калий, электролиты</p></a>
+<a class="card" href="chloride/"><h3>Хлориды (Cl)</h3><p class="muted">Поддерживают кислотно-щелочной баланс.</p><p class="meta">хлориды, электролиты</p></a>
+<a class="card" href="pt_inr/"><h3>Протромбиновое время / INR</h3><p class="muted">Оценивает свёртываемость и контроль антикоагулянтов.</p><p class="meta">coagulation, ptinr</p></a>
+<a class="card" href="d_dimer/"><h3>D-димер</h3><p class="muted">Маркер тромбообразования/фибринолиза.</p><p class="meta">d_dimer, коагуляция</p></a>
+<a class="card" href="troponin_i/"><h3>Тропонин I</h3><p class="muted">Кардиальный маркер при инфаркте миокарда.</p><p class="meta">тропонин, сердце</p></a>
+<a class="card" href="ck_mb/"><h3>CK-MB</h3><p class="muted">Кардиальный фермент (реже используется рутинно).</p><p class="meta">ck_mb, сердце</p></a>
+<a class="card" href="troponin_t/"><h3>Тропонин T</h3><p class="muted">Альтернативный кардиальный маркер.</p><p class="meta">тропонин, сердце</p></a>
+<a class="card" href="psa/"><h3>PSA (простат-специфический антиген)</h3><p class="muted">Скрининг простаты и мониторинг РПЖ.</p><p class="meta">psa, простата</p></a>
+<a class="card" href="hbsag/"><h3>HBsAg (гепатит B)</h3><p class="muted">Скрининг на вирус гепатита B.</p><p class="meta">hepatitis_b, hbsag</p></a>
+<a class="card" href="hcv_ab/"><h3>Антитела к HCV</h3><p class="muted">Скрининг на вирусный гепатит C.</p><p class="meta">hepatitis_c, hcv</p></a>
+<a class="card" href="hiv_ab/"><h3>Антитела к HIV</h3><p class="muted">Скрининг на ВИЧ-инфекцию.</p><p class="meta">hiv, инфекции</p></a>
+<a class="card" href="urine_routine/"><h3>Общий анализ мочи (ОАМ)</h3><p class="muted">Физико-химические и микроскопические показатели мочи.</p><p class="meta">oam, моча</p></a>
+<a class="card" href="urine_culture/"><h3>Посев мочи</h3><p class="muted">Определяет бактерии и антибиотикочувствительность.</p><p class="meta">посев, микробиология</p></a>
+<a class="card" href="stool_occult/"><h3>Скрытая кровь в кале (FOBT)</h3><p class="muted">Скрининг на кровопотери ЖКТ.</p><p class="meta">fobt, кал</p></a>
+<a class="card" href="stool_ova/"><h3>Копрологическое исследование (яйца/цисты)</h3><p class="muted">Ищут паразитов в кале.</p><p class="meta">паразиты, кал</p></a>
+<a class="card" href="fecal_calprotectin/"><h3>Кальпротектин фекалий</h3><p class="muted">Маркер воспаления кишечника.</p><p class="meta">кал, воспаление</p></a>
+<a class="card" href="lipase/"><h3>Липаза</h3><p class="muted">Специфичный маркер поджелудочной железы.</p><p class="meta">липаза, панкреатит</p></a>
+<a class="card" href="amylase/"><h3>Амилаза</h3><p class="muted">Фермент поджелудочной/слюнных желёз.</p><p class="meta">амилаза, панкреатит</p></a>
+<a class="card" href="insulin/"><h3>Инсулин</h3><p class="muted">Исследуется при подозрении на инсулинрезистентность.</p><p class="meta">инсулин, диабет</p></a>
+<a class="card" href="cortisol/"><h3>Кортизол</h3><p class="muted">Гормон стресса; суточные колебания.</p><p class="meta">кортизол, гормоны</p></a>
+<a class="card" href="tsh/"><h3>TSH</h3><p class="muted">Скрининг функции щитовидной железы.</p><p class="meta">tsh, щитовидка</p></a>
+<a class="card" href="free_t4/"><h3>Свободный T4</h3><p class="muted">Активная фракция тироксина.</p><p class="meta">ft4, щитовидка</p></a>
+<a class="card" href="anti_tpo/"><h3>Антитела к ТПО</h3><p class="muted">Маркер аутоиммунного тиреоидита.</p><p class="meta">anti_tpo, аутоиммунитет</p></a>
+<a class="card" href="hba/"><h3>Гемоглобин A (замена)</h3><p class="muted">(служебная строка)ред.</p><p class="meta">служебное</p></a>
+<a class="card" href="vitamin_b1/"><h3>Витамин B1 (тиамин)</h3><p class="muted">Минерал для нервной системы.</p><p class="meta">vit_b1, витамины</p></a>
+<a class="card" href="vitamin_b6/"><h3>Витамин B6</h3><p class="muted">Участвует в метаболизме аминокислот.</p><p class="meta">vit_b6, витамины</p></a>
+<a class="card" href="vitamin_a/"><h3>Витамин A</h3><p class="muted">Жирорастворимый витамин для зрения.</p><p class="meta">vitamin_a, витамины</p></a>
+<a class="card" href="vitamin_e/"><h3>Витамин E</h3><p class="muted">Антиоксидант, влияет на нейроны.</p><p class="meta">vitamin_e, витамины</p></a>
+<a class="card" href="fsh/"><h3>FSH</h3><p class="muted">Репродуктивный гормон для оценки фертильности.</p><p class="meta">fsh, гормоны</p></a>
+<a class="card" href="lh/"><h3>LH</h3><p class="muted">Гормон овуляции и мужской функции.</p><p class="meta">lh, гормоны</p></a>
+<a class="card" href="estradiol/"><h3>Эстрадиол</h3><p class="muted">Женский половой гормон; зависит от цикла.</p><p class="meta">эстрадиол, гормоны</p></a>
+<a class="card" href="testosterone/"><h3>Тестостерон</h3><p class="muted">Половой гормон у мужчин и женщин.</p><p class="meta">тестостерон, гормоны</p></a>
+<a class="card" href="prolactin/"><h3>Пролактин</h3><p class="muted">Гормон лактации; повышение мешает фертильности.</p><p class="meta">пролактин, гормоны</p></a>
+<a class="card" href="creatine_kinase/"><h3>КК (CK)</h3><p class="muted">Фермент повреждения мышц.</p><p class="meta">ck, мышцы</p></a>
+<a class="card" href="ammonia/"><h3>Аммиак</h3><p class="muted">Повышение при печёночной энцефалопатии.</p><p class="meta">аммиак, печень</p></a>
+<a class="card" href="homocysteine/"><h3>Гомоцистеин</h3><p class="muted">Маркер риска ССЗ, связан с B-витаминами.</p><p class="meta">homocysteine, сердце</p></a>
+<a class="card" href="ferritin_s/"><h3>Ферритин (женщины)</h3><p class="muted">Отдельный контроль запасов железа у женщин.</p><p class="meta">ферритин, женщины</p></a>
+<a class="card" href="uric_acid/"><h3>Мочевая кислота</h3><p class="muted">Риск подагры при повышении.</p><p class="meta">мочевая_кислота, подагра</p></a>
+<a class="card" href="lpa/"><h3>Липопротеин(a)</h3><p class="muted">Независимый фактор риска ССЗ.</p><p class="meta">lpa, сердце</p></a>
+<a class="card" href="aptt/"><h3>APTT</h3><p class="muted">Активированное частичное тромбопределение.</p><p class="meta">aptt, коагуляция</p></a>
+<a class="card" href="vitamin_k/"><h3>Витамин K</h3><p class="muted">Важен для свертывания крови.</p><p class="meta">vit_k, коагуляция</p></a>
+<a class="card" href="fibrinogen/"><h3>Фибриноген</h3><p class="muted">Коагуляционный белок; при воспалении растёт.</p><p class="meta">fibrinogen, коагуляция</p></a>
 
-  <main class="container">
-    <section class="search-panel">
-      <div class="search-wrap">
-        <input id="search" type="search" placeholder="Например: глюкоза, гемоглобин, холестерин" aria-label="Поиск по анализам" />
-        <button id="clear">Очистить</button>
-      </div>
-      <div id="info" class="info-row">Загрузка списка анализов...</div>
-    </section>
-
-    <section id="tags" class="tags-row" aria-hidden="false"></section>
-
-    <section id="results" class="results-grid" aria-live="polite">
-      <!-- Карточки появятся здесь -->
-    </section>
-
-    <section id="debug" class="debug" aria-hidden="true"></section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <small>© <span id="year"></span> Справочник анализов. Информация справочная — при отклонениях обратитесь к врачу.</small>
-    </div>
-  </footer>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="script.js"></script>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><small>© Справочник анализов</small></div></footer>
+<script src="script.js"></script>
 </body>
 </html>
