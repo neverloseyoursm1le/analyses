@@ -21,13 +21,14 @@ jobs:
         run: pip install pandas jinja2
 
       - name: Generate site
-        run: python3 analyses/generate.py --out .
+        run: python3 analyses/generate.py --csv analyses/data.csv --out analyses
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: site
           path: analyses/
+
           
       - name: Move files to gh-pages/root
         run: |
