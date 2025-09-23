@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует подготовки.</p>
 
-    <p class="muted">Теги: soe,esr,воспаление</p>
+    <div id="checker" class="checker"
+      data-mid-min="2.0"
+      data-mid-max="10.0"
+      data-low="15.0"
+      data-high="30.0"
+      data-norm-low="M:&gt;15;F:&gt;20"
+      data-norm-mid="M:2–10;F:3–15"
+      data-norm-high="&gt;30"
+      data-below="Высокая СОЭ — воспаление, хронические процессы."
+      data-normal="Норма по возрасту/полу."
+      data-above="Очень высокая — активный воспалительный процесс."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

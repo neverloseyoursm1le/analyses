@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>По назначению врача.</p>
 
-    <p class="muted">Теги: ck_mb,сердце</p>
+    <div id="checker" class="checker"
+      data-mid-min=""
+      data-mid-max=""
+      data-low="5.0"
+      data-high="25.0"
+      data-norm-low="&lt;5 ng/mL"
+      data-norm-mid="&lt;5 ng/mL"
+      data-norm-high="&gt;25 ng/mL"
+      data-below="Норма — редко повышен."
+      data-normal="Норма — низкий уровень."
+      data-above="Повышение — повреждение сердца."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

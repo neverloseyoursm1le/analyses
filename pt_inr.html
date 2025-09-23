@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не прекращайте лекарства без указания врача.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="0.9"
+      data-mid-max="1.2"
+      data-low="0.8"
+      data-high="3.0"
+      data-norm-low="INR&lt;0.8"
+      data-norm-mid="INR0.9–1.2"
+      data-norm-high="INR&gt;3.0"
+      data-below="Низкий — риск тромбоза при терапии."
+      data-normal="Норма — нормальное свёртывание."
+      data-above="Высокий — риск кровотечений; нужен контроль."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: coagulation,ptinr</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

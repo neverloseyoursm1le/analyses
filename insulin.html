@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак; может потребоваться нагрузочный тест.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="2.0"
+      data-mid-max="25.0"
+      data-low="2.0"
+      data-high="25.0"
+      data-norm-low="&lt;2 µIU/mL"
+      data-norm-mid="2–25 µIU/mL"
+      data-norm-high="&gt;25 µIU/mL"
+      data-below="Низкий — редкая эндокринная патология."
+      data-normal="Норма — адекватная секреция."
+      data-above="Высокий — инсулинрезистентность."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: инсулин,диабет</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

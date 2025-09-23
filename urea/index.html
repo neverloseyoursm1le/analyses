@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак предпочтителен.</p>
 
-    <p class="muted">Теги: мочевина,почки</p>
+    <div id="checker" class="checker"
+      data-mid-min="2.5"
+      data-mid-max="7.2"
+      data-low="7.2"
+      data-high="20.0"
+      data-norm-low="&gt;7.2 mmol/L"
+      data-norm-mid="2.5–7.2 mmol/L"
+      data-norm-high="&gt;20 mmol/L"
+      data-below="Высокая — почки, дегидратация."
+      data-normal="Норма — адекватный обмен."
+      data-above="Очень высокие — почечная недостаточность."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

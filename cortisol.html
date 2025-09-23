@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Указывать время забора; натощак утром.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="5.0"
+      data-mid-max="25.0"
+      data-low="5.0"
+      data-high="25.0"
+      data-norm-low="М:утром&lt;5 µg/dL"
+      data-norm-mid="М:утром~5–25 µg/dL"
+      data-norm-high="М:утром&gt;25 µg/dL"
+      data-below="Низкий — надпочечниковая недостаточность."
+      data-normal="Норма — суточный профиль."
+      data-above="Высокий — синдром Кушинга."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: кортизол,гормоны</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

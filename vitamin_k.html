@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Уточнять при проблемах свертывания.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="0.1"
+      data-mid-max="1.0"
+      data-low="0.1"
+      data-high="1.0"
+      data-norm-low="&lt;0.1 µg/mL"
+      data-norm-mid="0.1–1.0 µg/mL"
+      data-norm-high="&gt;1.0 µg/mL"
+      data-below="Дефицит — риск кровотечений."
+      data-normal="Норма — достаточный коагуляционный резерв."
+      data-above="Высокие — редко клинически значимые."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: vit_k,коагуляция</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

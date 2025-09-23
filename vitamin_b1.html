@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует подготовки.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="20.0"
+      data-mid-max="100.0"
+      data-low="20.0"
+      data-high="100.0"
+      data-norm-low="&lt;20 nmol/L"
+      data-norm-mid="20–100 nmol/L"
+      data-norm-high="&gt;100 nmol/L"
+      data-below="Дефицит — неврологические проявления."
+      data-normal="Норма — адекватный уровень."
+      data-above="Высокие — редко клинически значимы."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: vit_b1,витамины</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>
