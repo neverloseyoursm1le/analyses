@@ -32,7 +32,7 @@ jobs:
       - name: Move files to gh-pages/root
         run: |
          mkdir -p root
-         cp -r *.html *.json style.css root/ || true
+         cp -r analyses/* root/
 
   deploy:
     runs-on: ubuntu-latest
