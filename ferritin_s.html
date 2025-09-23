@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует натощак.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="15.0"
+      data-mid-max="150.0"
+      data-low="15.0"
+      data-high="500.0"
+      data-norm-low="&lt;15 µg/L"
+      data-norm-mid="15–150 µg/L"
+      data-norm-high="&gt;500 µg/L"
+      data-below="Дефицит — анемия, усталость."
+      data-normal="Норма — достаточные запасы."
+      data-above="Очень высокий — воспаление/перегрузка."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: ферритин,женщины</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

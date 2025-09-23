@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Избегать физнагрузки перед сдачей.</p>
 
-    <p class="muted">Теги: калий,электролиты</p>
+    <div id="checker" class="checker"
+      data-mid-min="3.5"
+      data-mid-max="5.0"
+      data-low="3.5"
+      data-high="6.0"
+      data-norm-low="&lt;3.5 mmol/L"
+      data-norm-mid="3.5–5.0 mmol/L"
+      data-norm-high="&gt;6.0 mmol/L"
+      data-below="Гипокалиемия — слабость, аритмии."
+      data-normal="Норма — безопасный диапазон."
+      data-above="Гиперкалиемия — угроза сердечной проводимости."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

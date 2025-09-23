@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует подготовки.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="5.0"
+      data-mid-max="20.0"
+      data-low="5.0"
+      data-high="20.0"
+      data-norm-low="&lt;5 µg/mL"
+      data-norm-mid="5–20 µg/mL"
+      data-norm-high="&gt;20 µg/mL"
+      data-below="Низкий — риск нейропатии."
+      data-normal="Норма — достаточный антиоксидантный статус."
+      data-above="Высокие — редко проблематично."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: vitamin_e,витамины</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

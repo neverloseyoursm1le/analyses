@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Указывать фазу цикла.</p>
 
-    <p class="muted">Теги: lh,гормоны</p>
+    <div id="checker" class="checker"
+      data-mid-min="2.0"
+      data-mid-max="12.0"
+      data-low="2.0"
+      data-high="20.0"
+      data-norm-low="M:&lt;2 IU/L;F: follicular&lt;10"
+      data-norm-mid="M:2–12;F:10–20"
+      data-norm-high="M:&gt;20;F:&gt;40"
+      data-below="Низкий — гипогонадизм."
+      data-normal="Норма — синхронная функция."
+      data-above="Высокий — менопауза/поликистоз."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

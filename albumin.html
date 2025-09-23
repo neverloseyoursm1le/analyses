@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак не обязателен.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="35.0"
+      data-mid-max="50.0"
+      data-low="35.0"
+      data-high="55.0"
+      data-norm-low="&lt;35 g/L"
+      data-norm-mid="35–50 g/L"
+      data-norm-high="&gt;55 g/L"
+      data-below="Низкий — хроническая болезнь, голодание."
+      data-normal="Норма: достаточный уровень белка."
+      data-above="Высокий редко клинически значим."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: альбумин,питание</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

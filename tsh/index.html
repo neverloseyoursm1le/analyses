@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Сдавать утром; сообщите лекарства.</p>
 
-    <p class="muted">Теги: tsh,щитовидка</p>
+    <div id="checker" class="checker"
+      data-mid-min="0.4"
+      data-mid-max="4.0"
+      data-low="4.5"
+      data-high="0.1"
+      data-norm-low="&gt;4.5 mIU/L"
+      data-norm-mid="0.4–4.0 mIU/L"
+      data-norm-high="&lt;0.1 mIU/L"
+      data-below="Высокий TSH — гипотиреоз."
+      data-normal="Норма — нормальная функция щитовидки."
+      data-above="Низкий — гипертиреоз."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>
