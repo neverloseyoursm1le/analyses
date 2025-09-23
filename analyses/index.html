@@ -1,45 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Справочник анализов — нормы, расшифровка, калькуляторы</title>
-  <meta name="description" content="Справочник по лабораторным анализам: нормы, подготовка, интерактивная проверка результатов. 50+ тестов." />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Анализы крови — справочник</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Справочник анализов</h1>
-      <p class="lead">Нормы, расшифровка и быстрые проверки результатов — удобно и понятно.</p>
-    </div>
+  <header>
+    <h1>Справочник анализов крови</h1>
+    <input type="text" id="search-input" placeholder="Введите название анализа...">
   </header>
 
-  <main class="container">
-    <section class="search-panel">
-      <div class="search-wrap">
-        <input id="search" type="search" placeholder="Например: глюкоза, гемоглобин, холестерин" aria-label="Поиск по анализам" />
-        <button id="clear">Очистить</button>
-      </div>
-      <div id="info" class="info-row">Загрузка списка анализов...</div>
-    </section>
+  <main id="cards-container"></main>
 
-    <section id="tags" class="tags-row" aria-hidden="false"></section>
-
-    <section id="results" class="results-grid" aria-live="polite">
-      <!-- Карточки появятся здесь -->
-    </section>
-
-    <section id="debug" class="debug" aria-hidden="true"></section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <small>© <span id="year"></span> Справочник анализов. Информация справочная — при отклонениях обратитесь к врачу.</small>
-    </div>
+  <footer>
+    <p>© 2025 Медицинский справочник. Для справочных целей, не заменяет консультацию врача.</p>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
   <script src="script.js"></script>
 </body>
 </html>
