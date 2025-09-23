@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует натощак.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="30.0"
+      data-mid-max="50.0"
+      data-low="20.0"
+      data-high="100.0"
+      data-norm-low="&lt;20 ng/mL"
+      data-norm-mid="30–50 ng/mL"
+      data-norm-high="&gt;100 ng/mL"
+      data-below="Дефицит — риск остеопороза, мышечной слабости."
+      data-normal="Оптимальный уровень — 30–50."
+      data-above="Очень высокий — токсичность возможна."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: vitamin_d,витамин_d25</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

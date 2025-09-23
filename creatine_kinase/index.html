@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Избегать нагрузки перед сдачей.</p>
 
-    <p class="muted">Теги: ck,мышцы</p>
+    <div id="checker" class="checker"
+      data-mid-min=""
+      data-mid-max=""
+      data-low="200.0"
+      data-high="1000.0"
+      data-norm-low="&lt;200 U/L"
+      data-norm-mid="&lt;200 U/L"
+      data-norm-high="&gt;1000 U/L"
+      data-below="Высокие — мышечное повреждение."
+      data-normal="Норма — минимальные значения."
+      data-above="Очень высокие — рабдомиолиз."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует подготовки.</p>
 
-    <p class="muted">Теги: vit_b6,витамины</p>
+    <div id="checker" class="checker"
+      data-mid-min="20.0"
+      data-mid-max="125.0"
+      data-low="20.0"
+      data-high="125.0"
+      data-norm-low="&lt;20 nmol/L"
+      data-norm-mid="20–125 nmol/L"
+      data-norm-high="&gt;125 nmol/L"
+      data-below="Дефицит — неврологические нарушения."
+      data-normal="Норма — достаточный уровень."
+      data-above="Избыток — периферическая нейропатия."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

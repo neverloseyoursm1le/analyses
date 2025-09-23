@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак 8–12 ч; избегать сладкого и алкоголя перед сдачей.</p>
 
-    <p class="muted">Теги: глюкоза,диабет,nat </p>
+    <div id="checker" class="checker"
+      data-mid-min="3.9"
+      data-mid-max="6.1"
+      data-low="3.9"
+      data-high="7.0"
+      data-norm-low="&lt;3.9"
+      data-norm-mid="3.9–6.1"
+      data-norm-high="&gt;7.0"
+      data-below="Гипогликемия: слабость, потливость, головокружение."
+      data-normal="В пределах нормы."
+      data-above="Высокий уровень — риск преддиабета/диабета, нужна консультация врача."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

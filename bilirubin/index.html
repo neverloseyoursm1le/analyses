@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует особой подготовки.</p>
 
-    <p class="muted">Теги: билирубин,печень</p>
+    <div id="checker" class="checker"
+      data-mid-min="3.0"
+      data-mid-max="20.0"
+      data-low="20.0"
+      data-high="50.0"
+      data-norm-low="&gt;20 µmol/L"
+      data-norm-mid="3–20 µmol/L"
+      data-norm-high="&gt;50"
+      data-below="Высокий — желтуха, нарушение обмена билирубина."
+      data-normal="Норма: обычно низкие значения."
+      data-above="Очень высокий — билиарная обструкция или гемолиз."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>
