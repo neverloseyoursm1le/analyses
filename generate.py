@@ -1,50 +1,41 @@
 #!/usr/bin/env python3
+# generate.py — генератор статического справочника анализов
+# - Читает CSV с разделителем '|' (по умолчанию file next to script: data.csv)
+# - Генерирует для каждой строки slug.html и slug/index.html
+# - Генерирует index.html и analyses.json
+# - Копирует style.css и script.js при наличии
+# Usage:
+#   python3 generate.py --csv analyses/data.csv --out analyses
+#   python3 generate.py --out .            # положит файлы в текущую папку
+
 import csv
 import argparse
 from pathlib import Path
 import json
 import shutil
 import html
-import re
 import sys
 
+# ---------- Настройки / утилиты ----------
 def slugify(s: str) -> str:
     if not s:
         return "item"
     s = str(s).strip().lower()
+    # простая очистка: оставить a-z0-9-_.
     out = []
     for ch in s:
         if ch.isalnum() or ch in "-_":
             out.append(ch)
         elif ch.isspace():
             out.append("-")
+        # остальные отбрасываем
     res = "".join(out).strip("-")
     return res or "item"
 
-def parse_number(s: str):
-    if not s:
-        return None
-    m = re.search(r'(-?\d+[.,]?\d*)', s)
-    if not m:
-        return None
-    try:
-        return float(m.group(1).replace(',', '.'))
-    except:
-        return None
+def safe(v):
+    return "" if v is None else str(v)
 
-def parse_range(s: str):
-    if not s:
-        return (None, None)
-    m = re.search(r'(-?\d+[.,]?\d*)\s*[–\-]\s*(-?\d+[.,]?\d*)', s)
-    if m:
-        try:
-            a = float(m.group(1).replace(',', '.'))
-            b = float(m.group(2).replace(',', '.'))
-            return (min(a,b), max(a,b))
-        except:
-            return (None, None)
-    return (None, None)
-
+# ---------- Шаблоны ----------
 PAGE_ROOT_TEMPLATE = """<!doctype html>
 <html lang="ru">
 <head>
@@ -73,26 +64,6 @@ PAGE_ROOT_TEMPLATE = """<!doctype html>
 
     <h3>Подготовка</h3>
     <p>{prep}</p>
-
-    <div id="checker" class="checker"
-      data-mid-min="{mid_min}"
-      data-mid-max="{mid_max}"
-      data-low="{low_val}"
-      data-high="{high_val}"
-      data-norm-low="{norm_low_attr}"
-      data-norm-mid="{norm_mid_attr}"
-      data-norm-high="{norm_high_attr}"
-      data-below="{below_attr}"
-      data-normal="{normal_attr}"
-      data-above="{above_attr}"
-      >
-      <label for="val">Проверить своё значение</label>
-      <div class="checker-input">
-        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
-        <button id="btn-check">Проверить</button>
-      </div>
-      <div id="out" class="checker-out muted"></div>
-    </div>
 
     <p class="muted">Теги: {tags}</p>
     <p><a href="index.html">← Назад к списку</a></p>
@@ -132,26 +103,7 @@ PAGE_FOLDER_TEMPLATE = """<!doctype html>
     <h3>Подготовка</h3>
     <p>{prep}</p>
 
-    <div id="checker" class="checker"
-      data-mid-min="{mid_min}"
-      data-mid-max="{mid_max}"
-      data-low="{low_val}"
-      data-high="{high_val}"
-      data-norm-low="{norm_low_attr}"
-      data-norm-mid="{norm_mid_attr}"
-      data-norm-high="{norm_high_attr}"
-      data-below="{below_attr}"
-      data-normal="{normal_attr}"
-      data-above="{above_attr}"
-      >
-      <label for="val">Проверить своё значение</label>
-      <div class="checker-input">
-        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
-        <button id="btn-check">Проверить</button>
-      </div>
-      <div id="out" class="checker-out muted"></div>
-    </div>
-
+    <p class="muted">Теги: {tags}</p>
   </article>
 </main>
 <script src="../script.js"></script>
@@ -171,16 +123,8 @@ INDEX_TEMPLATE = """<!doctype html>
 <body>
 <header class="site-header"><div class="container"><h1>Справочник анализов</h1><p class="lead">Найдите анализ и проверьте результат</p></div></header>
 <main class="container">
-  <div class="search-panel">
-    <div class="search-wrap">
-      <input id="search" placeholder="Поиск: название, тег или симптом">
-      <button id="clear">Очистить</button>
-    </div>
-    <div id="tags" class="tags-row"></div>
-  </div>
-
-  <section id="results" class="results-grid">
-    <!-- cards will be rendered by script.js -->
+  <section class="results-grid">
+{cards}
   </section>
 </main>
 <footer class="site-footer"><div class="container"><small>© Справочник анализов</small></div></footer>
@@ -189,8 +133,9 @@ INDEX_TEMPLATE = """<!doctype html>
 </html>
 """
 
+# ---------- Основная логика ----------
 def main():
-    parser = argparse.ArgumentParser(description="Генератор справочника (CSV -> HTML)")
+    parser = argparse.ArgumentParser(description="Генератор статического справочника анализов (CSV -> HTML)")
     parser.add_argument("--csv", default=None, help="Путь к CSV (по умолчанию: data.csv рядом со скриптом)")
     parser.add_argument("--out", default="analyses", help="Папка вывода")
     args = parser.parse_args()
@@ -215,40 +160,44 @@ def main():
     items = []
     generated = 0
 
+    # читаем CSV
     with csv_path.open(newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="|")
+        # проверка заголовков
         headers = reader.fieldnames or []
+        required = {"slug","title","summary","description","norm_low","norm_mid","norm_high","below","normal","above","prep","tags"}
+        missing = required - set([h.strip() for h in headers])
+        if missing:
+            print("WARNING: CSV header doesn't contain all expected fields. Missing:", missing)
+            # но всё равно попробуем: будем брать доступные поля
+
         for i, row in enumerate(reader, start=1):
             if not row:
                 continue
-            slug_raw = (row.get("slug") or row.get("id") or row.get("name") or "").strip()
+            slug_raw = safe(row.get("slug")) or safe(row.get("id")) or safe(row.get("name"))
             slug = slugify(slug_raw)
             if not slug:
-                print(f"Skip row #{i}: empty slug", file=sys.stderr)
+                print(f"Skip row #{i}: empty slug/name", file=sys.stderr)
                 continue
 
-            title = (row.get("title") or "").strip()
-            summary = (row.get("summary") or "").strip()
-            description = (row.get("description") or "").strip()
-            norm_low = (row.get("norm_low") or "").strip()
-            norm_mid = (row.get("norm_mid") or "").strip()
-            norm_high = (row.get("norm_high") or "").strip()
-            below = (row.get("below") or "").strip()
-            normal = (row.get("normal") or "").strip()
-            above = (row.get("above") or "").strip()
-            prep = (row.get("prep") or "").strip()
-            tags_raw = (row.get("tags") or "").strip()
+            title = safe(row.get("title")) or slug
+            summary = safe(row.get("summary")) or ""
+            description = safe(row.get("description")) or summary
+            norm_low = safe(row.get("norm_low")) or ""
+            norm_mid = safe(row.get("norm_mid")) or ""
+            norm_high = safe(row.get("norm_high")) or ""
+            below = safe(row.get("below")) or ""
+            normal = safe(row.get("normal")) or ""
+            above = safe(row.get("above")) or ""
+            prep = safe(row.get("prep")) or ""
+            tags_raw = safe(row.get("tags")) or ""
             tags_list = [t.strip() for t in tags_raw.split(",") if t.strip()]
 
-            # parse numeric thresholds when possible
-            mid_min, mid_max = parse_range(norm_mid)
-            low_val = parse_number(norm_low)
-            high_val = parse_number(norm_high)
-
+            # подготовка данных (escape для безопасности HTML)
             ctx = {
                 "title": html.escape(title),
                 "summary": html.escape(summary),
-                "description": html.escape(description).replace("\n", "<br>"),
+                "description": html.escape(description).replace("\n","<br>"),
                 "norm_low": html.escape(norm_low),
                 "norm_mid": html.escape(norm_mid),
                 "norm_high": html.escape(norm_high),
@@ -256,26 +205,19 @@ def main():
                 "normal": html.escape(normal),
                 "above": html.escape(above),
                 "prep": html.escape(prep),
-                "tags": html.escape(tags_raw),
-                "mid_min": str(mid_min) if mid_min is not None else "",
-                "mid_max": str(mid_max) if mid_max is not None else "",
-                "low_val": str(low_val) if low_val is not None else "",
-                "high_val": str(high_val) if high_val is not None else "",
-                "norm_low_attr": html.escape(norm_low, quote=True),
-                "norm_mid_attr": html.escape(norm_mid, quote=True),
-                "norm_high_attr": html.escape(norm_high, quote=True),
-                "below_attr": html.escape(below, quote=True),
-                "normal_attr": html.escape(normal, quote=True),
-                "above_attr": html.escape(above, quote=True)
+                "tags": html.escape(tags_raw)
             }
 
-            # write slug.html and slug/index.html
+            # формируем HTML
             root_html = PAGE_ROOT_TEMPLATE.format(**ctx)
-            (outdir / f"{slug}.html").write_text(root_html, encoding="utf-8")
+            folder_html = PAGE_FOLDER_TEMPLATE.format(**ctx)
 
+            # записываем root slug.html (например analyses/glucose.html)
+            out_root_file = outdir / f"{slug}.html"
+            out_root_file.write_text(root_html, encoding="utf-8")
+            # записываем folder index (например analyses/glucose/index.html)
             page_dir = outdir / slug
             page_dir.mkdir(parents=True, exist_ok=True)
-            folder_html = PAGE_FOLDER_TEMPLATE.format(**ctx)
             (page_dir / "index.html").write_text(folder_html, encoding="utf-8")
 
             items.append({
@@ -286,7 +228,7 @@ def main():
                 "tags": tags_list
             })
             generated += 1
-            print(f"[{i}] generated: {outdir / (slug + '.html')} and {page_dir / 'index.html'}")
+            print(f"[{i}] generated: {out_root_file}  and {page_dir/'index.html'}")
 
     if generated == 0:
         print("WARNING: No rows processed from CSV. Aborting (no pages generated).", file=sys.stderr)
@@ -303,13 +245,15 @@ def main():
         (outdir / "index.html").write_text(index_html, encoding="utf-8")
         (outdir / "analyses.json").write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
 
-        # copy static assets
+        # copy static assets (style/script)
         if style_src.exists():
             dst = (outdir / "style.css").resolve()
             src = style_src.resolve()
             if src != dst:
                 shutil.copy(src, dst)
                 print("Copied style.css ->", dst)
+            else:
+                print("style.css already in output folder; skipped copy")
         else:
             print("style.css not found next to script; pages may look unstyled.")
 
@@ -319,8 +263,11 @@ def main():
             if src != dst:
                 shutil.copy(src, dst)
                 print("Copied script.js ->", dst)
+            else:
+                print("script.js already in output folder; skipped copy")
         else:
-            (outdir / "script.js").write_text("// placeholder\n", encoding="utf-8")
+            # создаём пустой script.js чтобы не ждать 404 в консоли
+            (outdir / "script.js").write_text("// optional site script\n", encoding="utf-8")
             print("Created placeholder script.js in output.")
 
         print(f"Generation complete: {generated} pages -> {outdir.resolve()}")
