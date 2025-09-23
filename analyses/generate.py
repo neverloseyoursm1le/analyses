@@ -297,11 +297,18 @@ def main():
             title_esc = html.escape(it["title"])
             summ_esc = html.escape(it["summary"])
             tags_str = ", ".join(it["tags"])
-            cards_html += f'<a class="card" href="{it["url"]}"><h3>{title_esc}</h3><p class="muted">{summ_esc}</p><p class="meta">{html.escape(tags_str)}</p></a>\n'
+            cards_html += f'''
+            <a class="card" href="{it["url"]}">
+              <h3>{title_esc}</h3>
+              <p class="muted">{summ_esc}</p>
+              <p class="meta">{html.escape(tags_str)}</p>
+            </a>
+            '''
 
-        index_html = INDEX_TEMPLATE.format(cards=cards_html)
-        (outdir / "index.html").write_text(index_html, encoding="utf-8")
-        (outdir / "analyses.json").write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
+        index_html = INDEX_TEMPLATE.replace(
+            '<section id="results" class="results-grid">\n    <!-- cards will be rendered by script.js -->',
+            f'<section id="results" class="results-grid">{cards_html}'
+        )
 
         # copy static assets
         if style_src.exists():
@@ -327,3 +334,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
