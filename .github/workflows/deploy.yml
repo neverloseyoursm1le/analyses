@@ -28,6 +28,11 @@ jobs:
         with:
           name: site
           path: analyses/
+          
+      - name: Move files to gh-pages/root
+        run: |
+         mkdir -p root
+         cp -r *.html *.json style.css root/ || true
 
   deploy:
     runs-on: ubuntu-latest
