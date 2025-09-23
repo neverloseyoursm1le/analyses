@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует строгого натощака.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min="200.0"
+      data-mid-max="900.0"
+      data-low="200.0"
+      data-high="900.0"
+      data-norm-low="&lt;200 pg/mL"
+      data-norm-mid="200–900 pg/mL"
+      data-norm-high="&gt;900 pg/mL"
+      data-below="Дефицит — утомляемость, парестезии."
+      data-normal="Норма — хорошая витаминная обеспеченность."
+      data-above="Очень высокий — редко клинически значим."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: b12,витамин</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

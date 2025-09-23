@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак; избегать нагрузок.</p>
 
-    <p class="muted">Теги: эритроциты,кровь</p>
+    <div id="checker" class="checker"
+      data-mid-min="4.5"
+      data-mid-max="5.9"
+      data-low="4.5"
+      data-high="6.0"
+      data-norm-low="M:&lt;4.5;F:&lt;3.9"
+      data-norm-mid="M:4.5–5.9;F:3.9–5.2"
+      data-norm-high="M:&gt;6.0;F:&gt;5.5"
+      data-below="Понижение — анемия, кровотечение."
+      data-normal="Норма: достаточно эритроцитов."
+      data-above="Повышение — дегидратация или полицитемия."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

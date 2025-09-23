@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак предпочтителен.</p>
 
-    <p class="muted">Теги: железо,анемия</p>
+    <div id="checker" class="checker"
+      data-mid-min="10.0"
+      data-mid-max="30.0"
+      data-low="10.0"
+      data-high="35.0"
+      data-norm-low="&lt;10 µmol/L"
+      data-norm-mid="10–30 µmol/L"
+      data-norm-high="&gt;35 µmol/L"
+      data-below="Низкий — анемия дефицита железа."
+      data-normal="Норма — достаточное железо."
+      data-above="Высокий — перегрузка железом."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Натощак предпочтителен.</p>
 
-    <p class="muted">Теги: липаза,панкреатит</p>
+    <div id="checker" class="checker"
+      data-mid-min=""
+      data-mid-max=""
+      data-low="160.0"
+      data-high="1000.0"
+      data-norm-low="&lt;160 U/L"
+      data-norm-mid="&lt;160 U/L"
+      data-norm-high="&gt;1000 U/L"
+      data-below="Норма — низкие значения."
+      data-normal="Норма — редко повышен."
+      data-above="Высокие — острый панкреатит."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>

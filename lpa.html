@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>Не требует натощак.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min=""
+      data-mid-max=""
+      data-low="50.0"
+      data-high="100.0"
+      data-norm-low="&gt;50 mg/dL"
+      data-norm-mid="&lt;30 mg/dL"
+      data-norm-high="&gt;100 mg/dL"
+      data-below="Высокие — повышенный риск ССЗ."
+      data-normal="Норма — низкий риск."
+      data-above="Очень высокий — высокий риск ранних ССЗ."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: lpa,сердце</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>
