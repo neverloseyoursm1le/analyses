@@ -27,6 +27,26 @@
     <h3>Подготовка</h3>
     <p>По симптомам и по назначению.</p>
 
+    <div id="checker" class="checker"
+      data-mid-min=""
+      data-mid-max=""
+      data-low="0.01"
+      data-high="0.1"
+      data-norm-low="&lt;0.01 ng/mL"
+      data-norm-mid="&lt;0.01 ng/mL"
+      data-norm-high="&gt;0.10 ng/mL"
+      data-below="Низкие — без повреждения."
+      data-normal="Норма — отрицательный."
+      data-above="Высокие — подозрение на инфаркт."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
     <p class="muted">Теги: тропонин,сердце</p>
     <p><a href="index.html">← Назад к списку</a></p>
   </article>

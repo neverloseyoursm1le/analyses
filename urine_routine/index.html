@@ -27,7 +27,26 @@
     <h3>Подготовка</h3>
     <p>Утренняя средняя порция; гигиена.</p>
 
-    <p class="muted">Теги: oam,моча</p>
+    <div id="checker" class="checker"
+      data-mid-min=""
+      data-mid-max=""
+      data-low=""
+      data-high=""
+      data-norm-low="положительный"
+      data-norm-mid="норма"
+      data-norm-high="положительный"
+      data-below="Белок/лейкоциты — возможно воспаление/инфекция."
+      data-normal="Норма — прозрачная, без белка."
+      data-above="Присутствие — инфекция/почки; дообследование."
+      >
+      <label for="val">Проверить своё значение</label>
+      <div class="checker-input">
+        <input id="val" type="text" placeholder="Введите число (без единиц) или текст (положительный/отрицательный)">
+        <button id="btn-check">Проверить</button>
+      </div>
+      <div id="out" class="checker-out muted"></div>
+    </div>
+
   </article>
 </main>
 <script src="../script.js"></script>
